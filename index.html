@@ -845,81 +845,133 @@ function updateHeader(){
 }
 async function activateUser(user){
  if(!user||!sb)return;
+
  currentUser=user;
  cloudReady=false;
  updateHeader();
  updateAccountModal();
 
- // Preserve guest information separately before loading cloud information.
- const guestDocs=JSON.parse(localStorage.getItem(GUEST_DOCS_KEY)||"null");
- const guestProfile=JSON.parse(localStorage.getItem(GUEST_PROFILE_KEY)||"null");
- if(guestDocs===null)localStorage.setItem(GUEST_DOCS_KEY,JSON.stringify(documents));
- if(guestProfile===null)localStorage.setItem(GUEST_PROFILE_KEY,JSON.stringify(profile));
+ // Save guest information only if it has not already been recorded.
+ if(localStorage.getItem(GUEST_DOCS_KEY)===null){
+  localStorage.setItem(GUEST_DOCS_KEY,JSON.stringify(documents));
+ }
+
+ if(localStorage.getItem(GUEST_PROFILE_KEY)===null){
+  localStorage.setItem(GUEST_PROFILE_KEY,JSON.stringify(profile));
+ }
 
  await loadCloudData();
 }
+
 async function loadCloudData(){
  if(!currentUser||!sb)return;
+
  try{
   const [docsResult,profileResult]=await Promise.all([
-   sb.from("zovra_documents").select("document_key,document_data").eq("user_id",currentUser.id),
-   sb.from("zovra_profiles").select("profile_data").eq("user_id",currentUser.id).maybeSingle()
+   sb.from("zovra_documents")
+    .select("document_key,document_data")
+    .eq("user_id",currentUser.id),
+
+   sb.from("zovra_profiles")
+    .select("profile_data")
+    .eq("user_id",currentUser.id)
+    .maybeSingle()
   ]);
 
   if(docsResult.error)throw docsResult.error;
   if(profileResult.error)throw profileResult.error;
 
-  const cloudDocs=(docsResult.data||[]).map(row=>({...row.document_data,id:row.document_key}));
-  const guestDocs=JSON.parse(localStorage.getItem(GUEST_DOCS_KEY)||"[]");
+  const cloudDocs=(docsResult.data||[]).map(row=>({
+   ...row.document_data,
+   id:row.document_key
+  }));
+
+  const guestDocs=JSON.parse(
+   localStorage.getItem(GUEST_DOCS_KEY)||"[]"
+  );
+
   const cloudProfile=profileResult.data?.profile_data||{};
-  const guestProfile=JSON.parse(localStorage.getItem(GUEST_PROFILE_KEY)||"{}");
+  const guestProfile=JSON.parse(
+   localStorage.getItem(GUEST_PROFILE_KEY)||"{}"
+  );
 
   let shouldSyncGuestProfile=false;
 
   if(guestDocs.length){
-   const merge=confirm("We found "+guestDocs.length+" document(s) saved in guest mode. Would you like to add them to your cloud account? Existing cloud documents will be kept.");
+   const merge=confirm(
+    "We found "+guestDocs.length+
+    " document(s) saved in guest mode. Would you like to add them to your cloud account? Existing cloud documents will be kept."
+   );
 
    if(merge){
     const merged=[...cloudDocs];
-    const cloudIds=new Set(cloudDocs.map(doc=>String(doc.id)));
+
+    // Recognise IDs even if they already contain guest- prefixes.
+    const cloudBaseIds=new Set(
+     cloudDocs.map(doc=>
+      String(doc.id).replace(/^(guest-)+/,"")
+     )
+    );
 
     for(let i=0;i<guestDocs.length;i++){
      const guestDoc=guestDocs[i];
-     const originalId=String(guestDoc.id??("document-"+i));
-     const migratedId="guest-"+originalId;
 
-     if(cloudIds.has(migratedId))continue;
+     const originalId=String(
+      guestDoc.id??("document-"+i)
+     );
 
-     const copy={...guestDoc,id:migratedId};
+     const baseId=originalId.replace(/^(guest-)+/,"");
+
+     // Do not import a document that already exists in the cloud.
+     if(cloudBaseIds.has(baseId))continue;
+
+     const migratedId="guest-"+baseId;
+
+     const copy={
+      ...guestDoc,
+      id:migratedId
+     };
+
      await saveCloudDocument(copy);
 
      merged.push(copy);
-     cloudIds.add(migratedId);
+     cloudBaseIds.add(baseId);
     }
 
     documents=merged;
 
-    // Clear guest documents only after successful cloud saving.
-    localStorage.removeItem(GUEST_DOCS_KEY);
+    // Keep the key so activateUser cannot recapture cloud documents.
+    // Empty it only after successful migration.
+    localStorage.setItem(GUEST_DOCS_KEY,"[]");
 
    }else{
     documents=cloudDocs;
    }
+
   }else{
    documents=cloudDocs;
   }
 
   if(Object.keys(cloudProfile).length){
    profile=cloudProfile;
+
   }else if(Object.keys(guestProfile).length){
    profile=guestProfile;
    shouldSyncGuestProfile=true;
+
   }else{
    profile={};
   }
 
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(documents));
-  localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));
+  localStorage.setItem(
+   STORAGE_KEY,
+   JSON.stringify(documents)
+  );
+
+  localStorage.setItem(
+   PROFILE_KEY,
+   JSON.stringify(profile)
+  );
 
   cloudReady=true;
 
@@ -934,52 +986,16 @@ async function loadCloudData(){
 
  }catch(e){
   cloudReady=false;
-  alert("We couldn't load your cloud documents: "+e.message+". Your browser data has not been deleted. Please try Sync again.");
+
+  alert(
+   "We couldn't load your cloud documents: "+
+   e.message+
+   ". Your browser data has not been deleted. Please try Sync again."
+  );
  }
 }
-async function saveCloudDocument(doc){
- if(!currentUser||!sb)return;
- const {error}=await sb.from("zovra_documents").upsert({
-  user_id:currentUser.id,
-  document_key:String(doc.id),
-  document_data:doc,
-  updated_at:new Date().toISOString()
- },{onConflict:"user_id,document_key"});
- if(error)throw error;
-}
-let documentSyncTimer=null;
-function queueCloudDocuments(){
- if(!currentUser||!sb||!cloudReady)return;
- clearTimeout(documentSyncTimer);
- documentSyncTimer=setTimeout(async()=>{
-  try{
-   for(const doc of documents)await saveCloudDocument(doc);
-  }catch(e){console.error("ZOVRA cloud document sync:",e);alert("Your browser copy is saved, but cloud sync needs attention. Open My account and try Sync my documents.")}
- },700);
-}
-let profileSyncTimer=null;
-async function queueCloudProfile(){
- if(!currentUser||!sb||!cloudReady)return;
- clearTimeout(profileSyncTimer);
- profileSyncTimer=setTimeout(async()=>{
-  const {error}=await sb.from("zovra_profiles").upsert({
-   user_id:currentUser.id,profile_data:profile,updated_at:new Date().toISOString()
-  },{onConflict:"user_id"});
-  if(error)console.error("ZOVRA profile sync:",error);
- },700);
-}
-async function syncNow(){
- if(!currentUser||!sb){alert("Log in first.");return}
- try{
-  for(const doc of documents)await saveCloudDocument(doc);
-  const {error}=await sb.from("zovra_profiles").upsert({
-   user_id:currentUser.id,profile_data:profile,updated_at:new Date().toISOString()
-  },{onConflict:"user_id"});
-  if(error)throw error;
-  await loadCloudData();
-  alert("Your ZOVRA documents and business profile have been synced.");
- }catch(e){alert("Sync failed: "+e.message)}
-}
+
+
 
 /* STARTUP */
 populateCurrencySelects();

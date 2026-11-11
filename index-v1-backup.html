@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZOVRA | Business, Simplified</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --black: #111111;
+  --dark: #1C1B19;
+  --cream: #F5F0E8;
+  --cream-light: #FBF9F5;
+  --gold: #C6A56B;
+  --gold-light: #E5D3B0;
+  --muted: #89847B;
+  --line: #E9E3D9;
+  --white: #FFFFFF;
+  --danger: #B34C43;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--black);
+  font-family: 'DM Sans', sans-serif;
+}
+
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+
+.topbar {
+  min-height: 78px;
+  background: var(--black);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.brand-mark {
+  width: 37px;
+  height: 37px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  font-size: 21px;
+}
+
+.brand small {
+  display: block;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 8px;
+  letter-spacing: 2.3px;
+  color: var(--gold);
+  font-weight: 600;
+  margin-top: -2px;
+}
+
+.top-status {
+  color: #D4C7B1;
+  font-size: 11px;
+}
+
+.container {
+  width: min(1420px, 94%);
+  margin: 40px auto;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  color: #A0804E;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.heading h1 {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(28px, 4vw, 40px);
+  margin: 0 0 7px;
+  letter-spacing: -1.8px;
+}
+
+.heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(350px, .95fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.panel {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  padding: 25px;
+  margin-bottom: 18px;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-title h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.section-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--cream);
+  color: #A0804E;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.field { margin-bottom: 15px; }
+.field.full { grid-column: 1 / -1; }
+
+label {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .7px;
+  margin-bottom: 8px;
+  color: #625D54;
+}
+
+input, select, textarea {
+  width: 100%;
+  border: 1px solid #E7E1D7;
+  border-radius: 7px;
+  padding: 12px;
+  outline: none;
+  background: #FFFEFC;
+  color: var(--black);
+  font-size: 12px;
+  transition: .2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px #C6A56B20;
+}
+
+textarea {
+  min-height: 76px;
+  resize: vertical;
+}
+
+.type-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--cream);
+  padding: 4px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.type-switch button {
+  border: 0;
+  background: transparent;
+  border-radius: 6px;
+  padding: 11px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.type-switch button.active {
+  background: var(--black);
+  color: var(--gold-light);
+  box-shadow: 0 2px 5px #0002;
+}
+
+.item-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 65px 100px 32px;
+  gap: 8px;
+  margin-bottom: 9px;
+  align-items: center;
+}
+
+.item-row input {
+  min-width: 0;
+  padding: 10px 8px;
+  font-size: 11px;
+}
+
+.remove-item {
+  border: 1px solid #E9D7D3;
+  background: #FFF8F6;
+  color: var(--danger);
+  border-radius: 7px;
+  height: 35px;
+  font-size: 17px;
+}
+
+.add-item {
+  background: var(--cream-light);
+  color: var(--black);
+  border: 1px dashed var(--gold);
+  border-radius: 7px;
+  width: 100%;
+  padding: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  margin-top: 5px;
+}
+
+.primary {
+  background: var(--black);
+  color: white;
+  border: 1px solid var(--black);
+  border-radius: 7px;
+  padding: 12px 18px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.primary:hover {
+  background: #35312A;
+}
+
+.gold-button {
+  background: var(--gold);
+  color: var(--black);
+  border: 1px solid var(--gold);
+  border-radius: 7px;
+  padding: 12px 18px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.gold-button:hover {
+  background: #D4B984;
+}
+
+.secondary {
+  background: white;
+  border: 1px solid var(--line);
+  color: var(--black);
+  border-radius: 7px;
+  padding: 11px 15px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.logo-upload {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.logo-upload input { max-width: 240px; }
+
+.preview-wrap {
+  position: sticky;
+  top: 18px;
+}
+
+.preview-label {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 12px;
+  color: #85765D;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.document {
+  background: white;
+  border: 1px solid #E9E1D5;
+  border-radius: 10px;
+  padding: clamp(22px, 4vw, 39px);
+  min-height: 570px;
+  box-shadow: 0 12px 40px #342B1B0D;
+}
+
+.doc-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: flex-start;
+  padding-bottom: 25px;
+  border-bottom: 2px solid var(--black);
+}
+
+.doc-brand {
+  font-family: 'Manrope', sans-serif;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  overflow-wrap: anywhere;
+}
+
+.doc-logo {
+  max-width: 105px;
+  max-height: 65px;
+  object-fit: contain;
+  display: none;
+  margin-bottom: 8px;
+}
+
+.doc-type {
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  color: #A0804E;
+  text-align: right;
+}
+
+.doc-meta {
+  text-align: right;
+  color: #89847B;
+  font-size: 10px;
+  line-height: 2;
+  margin-top: 9px;
+}
+
+.doc-meta strong { color: var(--black); }
+
+.doc-parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 27px 0;
+}
+
+.doc-caption {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #A0804E;
+  margin-bottom: 9px;
+}
+
+.doc-party-name {
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 5px;
+  overflow-wrap: anywhere;
+}
+
+.doc-party-details {
+  font-size: 10px;
+  line-height: 1.8;
+  color: #77736D;
+  overflow-wrap: anywhere;
+}
+
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.doc-table th {
+  background: var(--black);
+  color: white;
+  text-align: left;
+  padding: 12px 8px;
+  font-size: 9px;
+  letter-spacing: .5px;
+}
+
+.doc-table td {
+  padding: 12px 8px;
+  border-bottom: 1px solid #EEE9E1;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.doc-table th:last-child,
+.doc-table td:last-child { text-align: right; }
+
+.doc-table th:nth-child(2),
+.doc-table td:nth-child(2) { text-align: center; }
+
+.doc-totals {
+  width: min(230px, 100%);
+  margin: 22px 0 0 auto;
+  font-size: 11px;
+}
+
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 0;
+  color: #77736D;
+}
+
+.total-line.grand {
+  color: var(--black);
+  font-size: 16px;
+  font-weight: 800;
+  border-top: 2px solid var(--gold);
+  margin-top: 5px;
+  padding-top: 12px;
+}
+
+.total-line.grand strong { color: #A0804E; }
+
+.doc-notes {
+  border-top: 1px solid var(--line);
+  margin-top: 28px;
+  padding-top: 17px;
+  font-size: 10px;
+  line-height: 1.8;
+  color: #77736D;
+  overflow-wrap: anywhere;
+}
+
+.doc-footer {
+  margin-top: 35px;
+  padding-top: 13px;
+  border-top: 1px solid var(--line);
+  font-size: 9px;
+  color: #A0804E;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.saved-list {
+  display: grid;
+  gap: 9px;
+}
+
+.saved-entry {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.saved-entry strong {
+  display: block;
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+.saved-entry small {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.saved-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.saved-actions button {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: white;
+  padding: 7px 9px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.saved-actions button[data-delete] {
+  color: var(--danger);
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 11px;
+  padding: 13px 0;
+}
+
+footer {
+  text-align: center;
+  color: #8B8172;
+  font-size: 10px;
+  padding: 25px;
+  letter-spacing: 1px;
+}
+
+.toast {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--black);
+  color: var(--gold-light);
+  padding: 13px 19px;
+  border-radius: 7px;
+  font-size: 11px;
+  box-shadow: 0 5px 25px #0002;
+  opacity: 0;
+  pointer-events: none;
+  transition: .25s;
+  z-index: 20;
+  max-width: 90%;
+  text-align: center;
+}
+
+.toast.show { opacity: 1; }
+
+@media(max-width: 900px) {
+  .workspace { grid-template-columns: 1fr; }
+  .preview-wrap { position: static; }
+}
+
+@media(max-width: 520px) {
+  .container { width: 94%; margin: 25px auto; }
+  .topbar { padding: 0 4%; }
+  .panel { padding: 18px; }
+  .field-grid { grid-template-columns: 1fr; }
+  .field.full { grid-column: auto; }
+  .item-row { grid-template-columns: minmax(0,1fr) 48px 80px 28px; gap: 5px; }
+  .item-row input { font-size: 10px; }
+  .document { padding: 16px; min-height: 0; }
+  .doc-brand { font-size: 20px; }
+  .doc-table { font-size: 9px; }
+  .doc-table th, .doc-table td { padding: 9px 5px; }
+  .top-status { font-size: 9px; }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  body {
+    background: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body * { visibility: hidden !important; }
+
+  #documentPreview,
+  #documentPreview * {
+    visibility: visible !important;
+  }
+
+  #documentPreview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 0;
+    padding: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">Z</div>
+    <div>
+      ZOVRA
+      <small>BUSINESS, SIMPLIFIED.</small>
+    </div>
+  </div>
+  <div class="top-status">Your workspace · Saved locally</div>
+</header>
+
+<main class="container">
+
+  <div class="heading">
+    <div>
+      <div class="eyebrow">WELCOME TO ZOVRA</div>
+      <h1>Document studio.</h1>
+      <p>Create polished business documents, without the busywork.</p>
+    </div>
+    <button class="gold-button" onclick="newDocument()">+ New document</button>
+  </div>
+
+  <div class="workspace">
+
+    <div class="editor">
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Document type</h2>
+          <span class="section-number">01</span>
+        </div>
+
+        <div class="type-switch">
+          <button id="quoteButton" class="active" onclick="setType('Quotation')">Quotation</button>
+          <button id="invoiceButton" onclick="setType('Invoice')">Invoice</button>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label>DOCUMENT NUMBER</label>
+            <input id="docNumber" value="QT-001" oninput="updatePreview()">
+          </div>
+          <div class="field">
+            <label>DATE</label>
+            <input id="docDate" type="date" oninput="updatePreview()">
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Your business</h2>
+          <span class="section-number">02</span>
+        </div>
+
+        <div class="field-grid">
+          <div class="field full">
+            <label>BUSINESS NAME</label>
+            <input id="businessName" placeholder="e.g. Valerie Studio" oninput="updatePreview()">
+          </div>
+
+          <div class="field">
+            <label>EMAIL ADDRESS</label>
+            <input id="businessEmail" type="email" placeholder="hello@business.com" oninput="updatePreview()">
+          </div>
+
+          <div class="field">
+            <label>PHONE NUMBER</label>
+            <input id="businessPhone" placeholder="+1 000 000 0000" oninput="updatePreview()">
+          </div>
+
+          <div class="field full">
+            <label>BUSINESS ADDRESS</label>
+            <textarea id="businessAddress" placeholder="Business address" oninput="updatePreview()"></textarea>
+          </div>
+
+          <div class="field full">
+            <label>BUSINESS LOGO</label>
+            <div class="logo-upload">
+              <input id="logoInput" type="file" accept="image/png,image/jpeg,image/webp">
+              <button class="secondary" onclick="removeLogo()">Remove logo</button>
+            </div>
+            <small style="display:block;color:#999;margin-top:7px;font-size:10px;">PNG, JPG or WebP · Maximum 2 MB</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Customer details</h2>
+          <span class="section-number">03</span>
+        </div>
+
+        <div class="field-grid">
+          <div class="field full">
+            <label>CUSTOMER / COMPANY NAME</label>
+            <input id="customerName" placeholder="Customer name" oninput="updatePreview()">
+          </div>
+
+          <div class="field">
+            <label>CUSTOMER EMAIL</label>
+            <input id="customerEmail" type="email" placeholder="customer@email.com" oninput="updatePreview()">
+          </div>
+
+          <div class="field">
+            <label>CUSTOMER PHONE</label>
+            <input id="customerPhone" placeholder="Phone number" oninput="updatePreview()">
+          </div>
+
+          <div class="field full">
+            <label>CUSTOMER ADDRESS</label>
+            <textarea id="customerAddress" placeholder="Customer address" oninput="updatePreview()"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Services and products</h2>
+          <span class="section-number">04</span>
+        </div>
+
+        <div class="item-row" style="font-size:10px;font-weight:800;color:#89847B;">
+          <span>DESCRIPTION</span>
+          <span>QTY</span>
+          <span>PRICE</span>
+          <span></span>
+        </div>
+
+        <div id="itemsContainer"></div>
+
+        <button class="add-item" onclick="addItem()">+ Add another item</button>
+
+        <div class="field-grid" style="margin-top:20px;">
+          <div class="field">
+            <label>CURRENCY</label>
+            <select id="currency" onchange="updatePreview()">
+              <option value="CAD">CAD — Canadian Dollar</option>
+              <option value="USD">USD — US Dollar</option>
+              <option value="GBP">GBP — British Pound</option>
+              <option value="NGN">NGN — Nigerian Naira</option>
+              <option value="EUR">EUR — Euro</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>TAX RATE (%)</label>
+            <input id="taxRate" type="number" min="0" step="0.01" value="5" oninput="updatePreview()">
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Payment and notes</h2>
+          <span class="section-number">05</span>
+        </div>
+
+        <div class="field">
+          <label>PAYMENT INSTRUCTIONS</label>
+          <textarea id="paymentInfo" placeholder="e.g. Payment due within 14 days. Bank transfer details..." oninput="updatePreview()"></textarea>
+        </div>
+
+        <div class="field">
+          <label>ADDITIONAL NOTES / TERMS</label>
+          <textarea id="notes" placeholder="Add any additional information..." oninput="updatePreview()"></textarea>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Save and export</h2>
+          <span class="section-number">06</span>
+        </div>
+
+        <div class="actions">
+          <button class="primary" onclick="saveDocument()">Save document</button>
+          <button class="gold-button" onclick="printDocument()">Download PDF</button>
+          <button class="secondary" onclick="newDocument()">Clear form</button>
+        </div>
+
+        <p style="font-size:10px;color:#89847B;line-height:1.7;margin:14px 0 0;">
+          Documents are saved in this browser on this device. Download your PDFs to keep permanent copies.
+        </p>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Saved documents</h2>
+          <span class="section-number" id="savedCount">0</span>
+        </div>
+        <div id="savedDocuments" class="saved-list"></div>
+      </section>
+
+    </div>
+
+    <aside class="preview-wrap">
+      <div class="preview-label">
+        <span>LIVE PREVIEW</span>
+        <span>DOCUMENT VIEW</span>
+      </div>
+
+      <div class="document" id="documentPreview">
+
+        <div class="doc-top">
+          <div>
+            <img id="previewLogo" class="doc-logo" alt="Business logo">
+            <div class="doc-brand" id="previewBusiness">YOUR BUSINESS</div>
+            <div class="doc-party-details" id="previewBusinessDetails"></div>
+          </div>
+
+          <div>
+            <div class="doc-type" id="previewType">QUOTATION</div>
+            <div class="doc-meta">
+              <div>Number: <strong id="previewNumber">QT-001</strong></div>
+              <div>Date: <strong id="previewDate">—</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-parties">
+          <div>
+            <div class="doc-caption">BILL FROM</div>
+            <div class="doc-party-name" id="previewFromName">Your business</div>
+            <div class="doc-party-details" id="previewFromDetails"></div>
+          </div>
+
+          <div>
+            <div class="doc-caption">BILL TO</div>
+            <div class="doc-party-name" id="previewCustomer">Customer name</div>
+            <div class="doc-party-details" id="previewCustomerDetails"></div>
+          </div>
+        </div>
+
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>DESCRIPTION</th>
+              <th>QTY</th>
+              <th>UNIT PRICE</th>
+              <th>TOTAL</th>
+            </tr>
+          </thead>
+          <tbody id="previewItems"></tbody>
+        </table>
+
+        <div class="doc-totals">
+          <div class="total-line">
+            <span>Subtotal</span>
+            <strong id="previewSubtotal">CAD $0.00</strong>
+          </div>
+
+          <div class="total-line">
+            <span id="previewTaxLabel">Tax (5%)</span>
+            <strong id="previewTax">CAD $0.00</strong>
+          </div>
+
+          <div class="total-line grand">
+            <span>Total</span>
+            <strong id="previewTotal">CAD $0.00</strong>
+          </div>
+        </div>
+
+        <div class="doc-notes">
+          <div id="previewPayment"></div>
+          <div id="previewNotes" style="margin-top:10px;"></div>
+        </div>
+
+        <div class="doc-footer">GENERATED WITH ZOVRA · BUSINESS, SIMPLIFIED.</div>
+
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<footer>ZOVRA © 2026 · BUSINESS, SIMPLIFIED.</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+let currentType = 'Quotation';
+let logoData = '';
+let items = [];
+let editingId = null;
+
+function today() {
+  const d = new Date();
+  const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+  return local.toISOString().slice(0,10);
+}
+
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#039;'
+  })[char]);
+}
+
+function money(value) {
+  const currency = $('currency').value;
+  try {
+    return new Intl.NumberFormat('en-CA', {
+      style:'currency',
+      currency:currency,
+      maximumFractionDigits:2
+    }).format(value);
+  } catch {
+    return currency + ' ' + Number(value).toFixed(2);
+  }
+}
+
+function setType(type) {
+  currentType = type;
+
+  $('quoteButton').classList.toggle('active', type === 'Quotation');
+  $('invoiceButton').classList.toggle('active', type === 'Invoice');
+
+  if (editingId === null) {
+    $('docNumber').value = type === 'Invoice' ? 'INV-001' : 'QT-001';
+  }
+
+  updatePreview();
+}
+
+function addItem(description = '', quantity = 1, price = 0) {
+  const id = 'item-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+
+  items.push({id, description, quantity, price});
+
+  renderItems();
+  updatePreview();
+}
+
+function renderItems() {
+  $('itemsContainer').innerHTML = items.map(item => `
+    <div class="item-row" data-id="${item.id}">
+      <input type="text" placeholder="Service or product"
+        value="${escapeHTML(item.description)}"
+        data-field="description">
+      <input type="number" min="0" step="1"
+        value="${Number(item.quantity)}"
+        data-field="quantity">
+      <input type="number" min="0" step="0.01"
+        value="${Number(item.price)}"
+        data-field="price">
+      <button class="remove-item" type="button"
+        data-remove="${item.id}" aria-label="Remove item">×</button>
+    </div>
+  `).join('');
+}
+
+$('itemsContainer').addEventListener('input', event => {
+  const row = event.target.closest('.item-row');
+  if (!row) return;
+
+  const item = items.find(i => i.id === row.dataset.id);
+  if (!item) return;
+
+  const field = event.target.dataset.field;
+  if (!field) return;
+
+  if (field === 'description') {
+    item.description = event.target.value;
+  } else {
+    item[field] = Math.max(0, Number(event.target.value) || 0);
+  }
+
+  updatePreview();
+});
+
+$('itemsContainer').addEventListener('click', event => {
+  const button = event.target.closest('[data-remove]');
+  if (!button) return;
+
+  items = items.filter(item => item.id !== button.dataset.remove);
+  renderItems();
+  updatePreview();
+});
+
+function getData() {
+  const ids = [
+    'docNumber','docDate','businessName','businessEmail',
+    'businessPhone','businessAddress','customerName',
+    'customerEmail','customerPhone','customerAddress',
+    'currency','taxRate','paymentInfo','notes'
+  ];
+
+  const data = {};
+
+  ids.forEach(id => data[id] = $(id).value);
+
+  data.type = currentType;
+  data.logoData = logoData;
+  data.items = items.map(item => ({...item}));
+
+  return data;
+}
+
+function putData(data) {
+  const ids = [
+    'docNumber','docDate','businessName','businessEmail',
+    'businessPhone','businessAddress','customerName',
+    'customerEmail','customerPhone','customerAddress',
+    'currency','taxRate','paymentInfo','notes'
+  ];
+
+  ids.forEach(id => {
+    $(id).value = data[id] ?? '';
+  });
+
+  currentType = data.type || 'Quotation';
+  logoData = data.logoData || '';
+
+  items = Array.isArray(data.items)
+    ? data.items.map((item, index) => ({
+        id:'loaded-' + index + '-' + Date.now(),
+        description:item.description || '',
+        quantity:Math.max(0, Number(item.quantity) || 0),
+        price:Math.max(0, Number(item.price) || 0)
+      }))
+    : [];
+
+  $('quoteButton').classList.toggle('active', currentType === 'Quotation');
+  $('invoiceButton').classList.toggle('active', currentType === 'Invoice');
+
+  $('logoInput').value = '';
+
+  renderItems();
+  updatePreview();
+}
+
+function updatePreview() {
+  const data = getData();
+
+  const business = data.businessName.trim() || 'YOUR BUSINESS';
+  const customer = data.customerName.trim() || 'Customer name';
+
+  $('previewBusiness').textContent = business;
+  $('previewFromName').textContent = business;
+  $('previewCustomer').textContent = customer;
+
+  $('previewType').textContent = currentType.toUpperCase();
+  $('previewNumber').textContent = data.docNumber || '—';
+  $('previewDate').textContent = data.docDate || '—';
+
+  const businessDetails = [
+    data.businessAddress,
+    data.businessEmail,
+    data.businessPhone
+  ].filter(Boolean).map(escapeHTML).join('<br>');
+
+  const customerDetails = [
+    data.customerAddress,
+    data.customerEmail,
+    data.customerPhone
+  ].filter(Boolean).map(escapeHTML).join('<br>');
+
+  $('previewBusinessDetails').innerHTML = businessDetails;
+  $('previewFromDetails').innerHTML = businessDetails;
+  $('previewCustomerDetails').innerHTML = customerDetails;
+
+  $('previewLogo').style.display = logoData ? 'block' : 'none';
+  $('previewLogo').src = logoData || '';
+  $('previewBusiness').style.display = logoData ? 'none' : 'block';
+
+  const subtotal = items.reduce((sum, item) => {
+    return sum + item.quantity * item.price;
+  }, 0);
+
+  const taxRate = Math.max(0, Number(data.taxRate) || 0);
+  const tax = subtotal * taxRate / 100;
+  const total = subtotal + tax;
+
+  $('previewItems').innerHTML = items.length
+    ? items.map(item => `
+      <tr>
+        <td>${escapeHTML(item.description || 'Service / product')}</td>
+        <td>${Number(item.quantity)}</td>
+        <td>${money(item.price)}</td>
+        <td>${money(item.quantity * item.price)}</td>
+      </tr>
+    `).join('')
+    : '<tr><td colspan="4" style="text-align:center;color:#999;padding:25px;">Your items will appear here.</td></tr>';
+
+  $('previewSubtotal').textContent = money(subtotal);
+  $('previewTaxLabel').textContent = `Tax (${taxRate}%)`;
+  $('previewTax').textContent = money(tax);
+  $('previewTotal').textContent = money(total);
+
+  $('previewPayment').innerHTML = data.paymentInfo
+    ? '<strong>PAYMENT INSTRUCTIONS</strong><br>' + escapeHTML(data.paymentInfo).replace(/\n/g,'<br>')
+    : '';
+
+  $('previewNotes').innerHTML = data.notes
+    ? '<strong>NOTES / TERMS</strong><br>' + escapeHTML(data.notes).replace(/\n/g,'<br>')
+    : '';
+}
+
+function readSaved() {
+  try {
+    return JSON.parse(localStorage.getItem('zovra_documents') || '[]');
+  } catch {
+    return [];
+  }
+}
+
+function saveDocument() {
+  const data = getData();
+
+  if (!data.docNumber.trim()) {
+    showToast('Please enter a document number.');
+    $('docNumber').focus();
+    return;
+  }
+
+  const documents = readSaved();
+
+  if (editingId !== null) {
+    const index = documents.findIndex(doc => doc.id === editingId);
+
+    if (index !== -1) {
+      documents[index] = {
+        ...data,
+        id:editingId,
+        savedAt:new Date().toISOString()
+      };
+    } else {
+      documents.push({
+        ...data,
+        id:editingId,
+        savedAt:new Date().toISOString()
+      });
+    }
+  } else {
+    const duplicate = documents.find(doc =>
+      doc.docNumber === data.docNumber &&
+      doc.type === data.type
+    );
+
+    if (duplicate) {
+      showToast('That document number already exists. Open it or use another number.');
+      return;
+    }
+
+    editingId = 'zovra-' + Date.now();
+
+    documents.push({
+      ...data,
+      id:editingId,
+      savedAt:new Date().toISOString()
+    });
+  }
+
+  try {
+    localStorage.setItem('zovra_documents', JSON.stringify(documents));
+    renderSaved();
+    showToast('Document saved successfully!');
+  } catch {
+    showToast('Storage is full. Download your PDF and remove old drafts.');
+  }
+}
+
+function renderSaved() {
+  const documents = readSaved();
+
+  $('savedCount').textContent = documents.length;
+
+  if (!documents.length) {
+    $('savedDocuments').innerHTML =
+      '<div class="empty">No saved documents yet. Your saved documents will appear here.</div>';
+    return;
+  }
+
+  $('savedDocuments').innerHTML = [...documents].reverse().map(doc => `
+    <div class="saved-entry">
+      <div>
+        <strong>${escapeHTML(doc.docNumber)} · ${escapeHTML(doc.customerName || 'Unnamed customer')}</strong>
+        <small>${escapeHTML(doc.type)} · ${escapeHTML(doc.currency)} · ${escapeHTML(doc.docDate || '')}</small>
+      </div>
+      <div class="saved-actions">
+        <button data-open="${doc.id}">Open</button>
+        <button data-delete="${doc.id}">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+$('savedDocuments').addEventListener('click', event => {
+  const open = event.target.closest('[data-open]');
+  const del = event.target.closest('[data-delete]');
+
+  if (open) {
+    const doc = readSaved().find(item => item.id === open.dataset.open);
+
+    if (doc) {
+      editingId = doc.id;
+      putData(doc);
+      window.scrollTo({top:0, behavior:'smooth'});
+      showToast('Document opened.');
+    }
+  }
+
+  if (del) {
+    if (!confirm('Delete this saved document?')) return;
+
+    const updated = readSaved().filter(item => item.id !== del.dataset.delete);
+
+    localStorage.setItem('zovra_documents', JSON.stringify(updated));
+
+    if (editingId === del.dataset.delete) editingId = null;
+
+    renderSaved();
+    showToast('Document deleted.');
+  }
+});
+
+function newDocument() {
+  if (!confirm('Start a new document? Save your current work first if needed.')) return;
+
+  editingId = null;
+  logoData = '';
+  currentType = 'Quotation';
+  items = [];
+
+  const defaults = {
+    docNumber:'QT-001',
+    docDate:today(),
+    businessName:'',
+    businessEmail:'',
+    businessPhone:'',
+    businessAddress:'',
+    customerName:'',
+    customerEmail:'',
+    customerPhone:'',
+    customerAddress:'',
+    currency:'CAD',
+    taxRate:'5',
+    paymentInfo:'',
+    notes:''
+  };
+
+  putData({...defaults, type:'Quotation', items:[], logoData:''});
+  addItem();
+  showToast('New document ready.');
+}
+
+function printDocument() {
+  updatePreview();
+  window.print();
+}
+
+function showToast(message) {
+  const toast = $('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+
+  clearTimeout(showToast.timer);
+
+  showToast.timer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2600);
+}
+
+function removeLogo() {
+  logoData = '';
+  $('logoInput').value = '';
+  updatePreview();
+  showToast('Logo removed.');
+}
+
+$('logoInput').addEventListener('change', event => {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith('image/')) {
+    showToast('Please choose an image file.');
+    return;
+  }
+
+  if (file.size > 2 * 1024 * 1024) {
+    showToast('Please choose a logo smaller than 2 MB.');
+    event.target.value = '';
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    logoData = reader.result;
+    updatePreview();
+    showToast('Logo added!');
+  };
+
+  reader.readAsDataURL(file);
+});
+
+$('docDate').value = today();
+
+addItem();
+updatePreview();
+renderSaved();
+</script>
+
+</body>
+</html>

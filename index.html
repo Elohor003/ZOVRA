@@ -338,15 +338,10 @@ const fallbackCurrencies=[
 
 
 function currencyCodes(){
- try{
-  if(typeof Intl.supportedValuesOf==="function"){
-   const list=Intl.supportedValuesOf("currency");
-   if(list&&list.length>100)return [...new Set([...list,...fallbackCurrencies])].sort();
-  }
- }catch(e){}
- return [...new Set(fallbackCurrencies)].sort();
+  return [...new Set(fallbackCurrencies)].sort();
 }
 const CURRENCIES=currencyCodes();
+
 
 function currencyName(code){
   const names = {

@@ -6,23 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ZOVRA — Business, Simplified.</title>
 <style>
-:root {
-  --black:#111111;
-  --cream:#F5F0E8;
-  --gold:#C6A56B;
-  --white:#fff;
-  --muted:#817b72;
-  --line:#e6dfd4;
-  --green:#24734b;
-  --red:#b54242;
-}
+:root{--black:#111;--cream:#F5F0E8;--gold:#C6A56B;--white:#fff;--muted:#817b72;--line:#e6dfd4;--green:#24734b;--red:#b54242}
 *{box-sizing:border-box}
 body{margin:0;background:var(--cream);color:var(--black);font-family:Arial,Helvetica,sans-serif}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
+button,input,select,textarea{font:inherit}button{cursor:pointer}
 header{background:var(--black);color:white;padding:20px 5%;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
-.brand{font-size:25px;font-weight:800;letter-spacing:4px}
-.brand span{color:var(--gold)}
+.brand{font-size:25px;font-weight:800;letter-spacing:4px}.brand span{color:var(--gold)}
 .tagline{font-size:10px;letter-spacing:2px;color:#c9c1b5;margin-top:5px}
 .header-right{font-size:12px;color:#d6cfc4}
 nav{display:flex;gap:8px;flex-wrap:wrap;padding:15px 5%;background:#fff;border-bottom:1px solid var(--line)}
@@ -30,558 +19,679 @@ nav button{border:0;background:transparent;padding:11px 15px;border-radius:7px;c
 nav button.active,nav button:hover{background:var(--black);color:white}
 main{max-width:1200px;margin:30px auto;padding:0 20px 60px}
 .page{display:none}.page.active{display:block}
-h1{font-size:27px;margin:0 0 8px}
-.sub{color:var(--muted);font-size:14px;margin:0 0 25px}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:25px}
-.card,.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px}
-.card small{color:var(--muted);font-size:12px}
-.card strong{display:block;font-size:25px;margin-top:12px}
+h1{font-size:27px;margin:0 0 8px}.sub{color:var(--muted);font-size:14px;margin:0 0 25px}
+.cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:25px}
+.card,.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:20px}
+.card small{color:var(--muted);font-size:12px}.card strong{display:block;font-size:23px;margin-top:10px}
 .card .mini{font-size:11px;color:var(--muted);margin-top:5px}
-.panel{margin-bottom:20px}
-.panel h2{font-size:17px;margin:0 0 18px}
+.breakdown{display:grid;gap:6px;margin-top:12px}
+.breakdown div{display:flex;justify-content:space-between;gap:8px;border-top:1px solid #f0ece6;padding-top:6px;font-size:12px}
+.breakdown strong{font-size:12px;margin:0;white-space:nowrap}
+.panel{margin-bottom:20px}.panel h2{font-size:17px;margin:0 0 18px}
 .toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}
 .btn{border:0;border-radius:7px;padding:12px 17px;font-weight:700}
-.primary{background:var(--black);color:white}
-.gold{background:var(--gold);color:var(--black)}
-.light{background:#eee8de;color:var(--black)}
-.danger{background:#f8e8e6;color:#a32f2f}
+.primary{background:var(--black);color:white}.gold{background:var(--gold);color:var(--black)}
+.light{background:#eee8de;color:var(--black)}.danger{background:#f8e8e6;color:#a32f2f}
 input,select,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:6px;background:white;color:var(--black);outline:none}
 input:focus,select:focus,textarea:focus{border-color:var(--gold)}
 textarea{min-height:75px;resize:vertical}
 label{display:block;font-size:12px;font-weight:700;margin:0 0 7px;color:#5d574e}
-.field{margin-bottom:15px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{margin-bottom:15px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:600px}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:650px}
 th,td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--line);font-size:13px}
 th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
-td strong{font-size:13px}
-.actions{display:flex;gap:7px;flex-wrap:wrap}
+td strong{font-size:13px}.actions{display:flex;gap:7px;flex-wrap:wrap}
 .smallbtn{padding:7px 10px;border:0;border-radius:5px;font-size:11px;font-weight:700;background:#eee8de}
 .status{display:inline-block;border-radius:30px;padding:6px 10px;font-size:10px;font-weight:700;text-transform:uppercase}
-.status.paid{background:#e2f2e8;color:#24734b}
-.status.unpaid{background:#f7edda;color:#956a22}
-.status.overdue{background:#f8e4e2;color:#ae3939}
-.status.draft{background:#ece9e4;color:#666}
+.status.paid{background:#e2f2e8;color:#24734b}.status.unpaid{background:#f7edda;color:#956a22}
+.status.overdue{background:#f8e4e2;color:#ae3939}.status.draft{background:#ece9e4;color:#666}
 .empty{text-align:center;color:var(--muted);padding:35px}
 .item-row{display:grid;grid-template-columns:3fr .8fr 1.2fr 1.2fr auto;gap:8px;align-items:end;margin-bottom:9px}
-.item-row input{min-width:0}
-.total-box{margin-left:auto;max-width:350px;margin-top:20px}
+.item-row input{min-width:0}.total-box{margin-left:auto;max-width:350px;margin-top:20px}
 .total-line{display:flex;justify-content:space-between;padding:8px 0;font-size:14px}
 .total-line.final{border-top:1px solid var(--line);font-size:19px;font-weight:800;padding-top:15px}
 .form-section{font-size:14px;font-weight:800;margin:22px 0 15px;padding-bottom:9px;border-bottom:1px solid var(--line)}
-.hidden{display:none!important}
-#editor{display:none}
-#editor.active{display:block}
+.hidden{display:none!important}#editor{display:none}#editor.active{display:block}
 .preview{background:white;border:1px solid var(--line);padding:30px;margin-top:25px}
 .preview-head{display:flex;justify-content:space-between;gap:20px;border-bottom:2px solid var(--black);padding-bottom:20px}
-.preview h2{letter-spacing:3px;margin:0}
-.preview-total{text-align:right;font-size:22px;font-weight:800;margin-top:20px}
-.search{max-width:270px}
+.preview h2{letter-spacing:3px;margin:0}.search{max-width:270px}
 .notice{background:#f4eee2;border:1px solid #e5d6b9;padding:13px;border-radius:8px;color:#6b5736;font-size:12px;margin-bottom:18px}
+.backup-actions{display:flex;gap:10px;flex-wrap:wrap}
 footer{text-align:center;padding:25px;color:var(--muted);font-size:11px}
-@media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){
- main{padding:0 12px 40px;margin-top:20px}
- .grid2,.grid3{grid-template-columns:1fr}
- .cards{gap:9px}
- .card{padding:14px}
- .card strong{font-size:20px}
- .item-row{grid-template-columns:1fr 1fr}
- .item-row .description{grid-column:1/-1}
- .preview{padding:16px}
- header{padding:18px 15px}
- nav{padding:10px;gap:3px}
- nav button{padding:10px;font-size:12px}
+@media(max-width:950px){.cards{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:650px){
+main{padding:0 12px 40px;margin-top:20px}.grid2,.grid3{grid-template-columns:1fr}
+.cards{grid-template-columns:repeat(2,1fr);gap:9px}.card{padding:14px}.card strong{font-size:19px}
+.item-row{grid-template-columns:1fr 1fr}.item-row .description{grid-column:1/-1}
+.preview{padding:16px}header{padding:18px 15px}nav{padding:10px;gap:3px}
+nav button{padding:10px;font-size:12px}
 }
 @media print{
- header,nav,main>.page:not(#documents),.no-print,#editor .toolbar,#editor .form-area,footer{display:none!important}
- body{background:white}
- main{margin:0;padding:0;max-width:none}
- #documents{display:block!important}
- #editor{display:block!important}
- .preview{border:0;margin:0;padding:20px}
+header,nav,main>.page:not(#documents),.no-print,#editor .toolbar,#editor .form-area,footer{display:none!important}
+body{background:white}main{margin:0;padding:0;max-width:none}
+#documents{display:block!important}#editor{display:block!important}
+.preview{border:0;margin:0;padding:20px}
 }
 </style>
 </head>
 <body>
 <header>
-  <div>
-    <div class="brand">ZOV<span>RA</span></div>
-    <div class="tagline">BUSINESS, SIMPLIFIED.</div>
-  </div>
-  <div class="header-right">Your business documents, made simple.</div>
+<div><div class="brand">ZOV<span>RA</span></div><div class="tagline">BUSINESS, SIMPLIFIED.</div></div>
+<div class="header-right">Your business documents, made simple.</div>
 </header>
 
 <nav>
-  <button class="active" data-page="dashboard">Dashboard</button>
-  <button data-page="documents">Documents</button>
-  <button data-page="business">Business profile</button>
+<button class="active" data-page="dashboard">Dashboard</button>
+<button data-page="documents">Documents</button>
+<button data-page="business">Business profile</button>
 </nav>
 
 <main>
 <section class="page active" id="dashboard">
-  <h1>Dashboard</h1>
-  <p class="sub">An overview of your business documents.</p>
-  <div class="cards">
-    <div class="card"><small>Total documents</small><strong id="statDocs">0</strong><div class="mini">Quotes and invoices</div></div>
-    <div class="card"><small>Total invoiced</small><strong id="statInvoiced">$0.00</strong><div class="mini">Invoice value</div></div>
-    <div class="card"><small>Payments received</small><strong id="statPaid">$0.00</strong><div class="mini">Marked as paid</div></div>
-    <div class="card"><small>Outstanding</small><strong id="statDue">$0.00</strong><div class="mini">Unpaid invoices</div></div>
-  </div>
-  <div class="panel">
-    <div class="toolbar">
-      <h2>Recent documents</h2>
-      <button class="btn primary" onclick="newDocument()">+ Create document</button>
-    </div>
-    <div id="recentList"></div>
-  </div>
+<h1>Dashboard</h1>
+<p class="sub">An overview of your business documents.</p>
+<div class="cards">
+<div class="card"><small>Total documents</small><strong id="statDocs">0</strong><div class="mini">Quotes and invoices</div></div>
+<div class="card"><small>Quotation value</small><div id="statQuotes" class="breakdown"></div><div class="mini">Saved quotations</div></div>
+<div class="card"><small>Total invoiced</small><div id="statInvoiced" class="breakdown"></div><div class="mini">Invoice value</div></div>
+<div class="card"><small>Payments received</small><div id="statPaid" class="breakdown"></div><div class="mini">Paid invoices</div></div>
+<div class="card"><small>Outstanding</small><div id="statDue" class="breakdown"></div><div class="mini">Unpaid and overdue invoices</div></div>
+</div>
+<div class="panel">
+<div class="toolbar"><h2>Recent documents</h2><button class="btn primary" onclick="newDocument()">+ Create document</button></div>
+<div id="recentList"></div>
+</div>
+<div class="panel">
+<h2>Your data and backups</h2>
+<p class="sub" style="margin-bottom:14px">Your information stays in this browser. Download a backup regularly to protect your documents.</p>
+<div class="backup-actions">
+<button class="btn light" onclick="exportBackup()">Download backup</button>
+<button class="btn light" onclick="document.getElementById('backupFile').click()">Restore backup</button>
+<input id="backupFile" class="hidden" type="file" accept=".json,application/json" onchange="importBackup(event)">
+</div>
+</div>
 </section>
 
 <section class="page" id="documents">
-  <div class="toolbar">
-    <div><h1>Documents</h1><p class="sub" style="margin:7px 0 0">Manage your quotations and invoices.</p></div>
-    <button class="btn primary" onclick="newDocument()">+ New document</button>
-  </div>
-  <div class="panel">
-    <div class="toolbar">
-      <input class="search" id="searchDocs" placeholder="Search documents..." oninput="renderDocuments()">
-      <select id="filterDocs" style="max-width:180px" onchange="renderDocuments()">
-        <option value="all">All documents</option>
-        <option value="Quotation">Quotations</option>
-        <option value="Invoice">Invoices</option>
-        <option value="Paid">Paid</option>
-        <option value="Unpaid">Unpaid</option>
-        <option value="Overdue">Overdue</option>
-      </select>
-    </div>
-    <div id="documentList"></div>
-  </div>
-  <div id="editor">
-    <div class="toolbar">
-      <div><h1 id="editorTitle">New document</h1><p class="sub" style="margin:6px 0 0">Complete the details below.</p></div>
-      <button class="btn light" onclick="closeEditor()">← Back to documents</button>
-    </div>
-    <div class="notice">Your documents are saved in this browser on this device. This version does not upload documents to a cloud account.</div>
-    <div class="panel form-area">
-      <div class="form-section">Document details</div>
-      <div class="grid3">
-        <div class="field"><label>Document type</label><select id="docType" onchange="updateNumberPreview()"><option>Quotation</option><option>Invoice</option></select></div>
-        <div class="field"><label>Document number</label><input id="docNumber" readonly></div>
-        <div class="field"><label>Issue date</label><input type="date" id="docDate"></div>
-      </div>
-      <div class="grid2">
-        <div class="field"><label>Due date</label><input type="date" id="dueDate"></div>
-        <div class="field"><label>Payment status</label><select id="docStatus"><option>Unpaid</option><option>Paid</option><option>Draft</option></select></div>
-      </div>
-      <div class="form-section">Your business</div>
-      <div class="grid2">
-        <div class="field"><label>Business name</label><input id="businessName" placeholder="Your business name"></div>
-        <div class="field"><label>Business email</label><input id="businessEmail" type="email" placeholder="hello@example.com"></div>
-        <div class="field"><label>Business phone</label><input id="businessPhone" placeholder="Phone number"></div>
-        <div class="field"><label>Currency</label><select id="currency"><option value="CAD">CAD — Canadian Dollar</option><option value="USD">USD — US Dollar</option><option value="GBP">GBP — British Pound</option><option value="NGN">NGN — Nigerian Naira</option><option value="EUR">EUR — Euro</option></select></div>
-      </div>
-      <div class="field"><label>Business address</label><textarea id="businessAddress" placeholder="Business address"></textarea></div>
-      <div class="form-section">Customer details</div>
-      <div class="grid2">
-        <div class="field"><label>Customer name</label><input id="customerName" placeholder="Customer or company"></div>
-        <div class="field"><label>Customer email</label><input id="customerEmail" type="email" placeholder="Customer email"></div>
-        <div class="field"><label>Customer phone</label><input id="customerPhone" placeholder="Customer phone"></div>
-      </div>
-      <div class="field"><label>Customer address</label><textarea id="customerAddress" placeholder="Customer address"></textarea></div>
-      <div class="form-section">Services or products</div>
-      <div id="items"></div>
-      <button class="btn light" onclick="addItem()">+ Add line item</button>
-      <div class="grid2" style="margin-top:20px">
-        <div class="field"><label>Tax rate (%)</label><input id="taxRate" type="number" min="0" step="0.01" value="0" oninput="calculate()"></div>
-        <div class="field"><label>Discount amount</label><input id="discount" type="number" min="0" step="0.01" value="0" oninput="calculate()"></div>
-      </div>
-      <div class="total-box">
-        <div class="total-line"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
-        <div class="total-line"><span>Discount</span><strong id="discountTotal">$0.00</strong></div>
-        <div class="total-line"><span>Tax</span><strong id="taxTotal">$0.00</strong></div>
-        <div class="total-line final"><span>Total</span><strong id="grandTotal">$0.00</strong></div>
-      </div>
-      <div class="form-section">Additional information</div>
-      <div class="field"><label>Payment instructions</label><textarea id="paymentInfo" placeholder="Payment method, bank details or instructions"></textarea></div>
-      <div class="field"><label>Notes / terms</label><textarea id="notes" placeholder="Thank you for your business."></textarea></div>
-      <div class="actions">
-        <button class="btn primary" onclick="saveDocument()">Save document</button>
-        <button class="btn gold" onclick="previewDocument()">Preview & print</button>
-        <button class="btn light" onclick="closeEditor()">Cancel</button>
-      </div>
-    </div>
-    <div id="previewArea" class="preview hidden"></div>
-  </div>
+<div class="toolbar">
+<div><h1>Documents</h1><p class="sub" style="margin:7px 0 0">Manage your quotations and invoices.</p></div>
+<button class="btn primary" onclick="newDocument()">+ New document</button>
+</div>
+<div class="panel">
+<div class="toolbar">
+<input class="search" id="searchDocs" placeholder="Search documents..." oninput="renderDocuments()">
+<select id="filterDocs" style="max-width:180px" onchange="renderDocuments()">
+<option value="all">All documents</option><option value="Quotation">Quotations</option>
+<option value="Invoice">Invoices</option><option value="Paid">Paid</option>
+<option value="Unpaid">Unpaid</option><option value="Overdue">Overdue</option><option value="Draft">Draft</option>
+</select>
+<select id="sortDocs" style="max-width:180px" onchange="renderDocuments()">
+<option value="newest">Newest first</option><option value="oldest">Oldest first</option>
+<option value="highest">Highest amount</option><option value="lowest">Lowest amount</option>
+</select>
+</div>
+<div id="documentList"></div>
+</div>
+
+<div id="editor">
+<div class="toolbar">
+<div><h1 id="editorTitle">New document</h1><p class="sub" style="margin:6px 0 0">Complete the details below.</p></div>
+<button class="btn light" onclick="closeEditor()">← Back to documents</button>
+</div>
+<div class="notice">Your documents are saved in this browser on this device. This version does not require an account or upload your documents to a cloud server.</div>
+
+<div class="panel form-area">
+<div class="form-section">Document details</div>
+<div class="grid3">
+<div class="field"><label>Document type</label><select id="docType" onchange="updateNumberPreview()"><option>Quotation</option><option>Invoice</option></select></div>
+<div class="field"><label>Document number</label><input id="docNumber" readonly></div>
+<div class="field"><label>Issue date</label><input type="date" id="docDate"></div>
+</div>
+<div class="grid2">
+<div class="field"><label>Due date</label><input type="date" id="dueDate"></div>
+<div class="field"><label>Payment status</label><select id="docStatus"><option>Unpaid</option><option>Paid</option><option>Draft</option></select></div>
+</div>
+
+<div class="form-section">Your business</div>
+<div class="grid2">
+<div class="field"><label>Business name</label><input id="businessName" placeholder="Your business name"></div>
+<div class="field"><label>Business email</label><input id="businessEmail" type="email" placeholder="hello@example.com"></div>
+<div class="field"><label>Business phone</label><input id="businessPhone" placeholder="Phone number"></div>
+<div class="field"><label>Currency</label><select id="currency"></select></div>
+</div>
+<div class="field"><label>Business address</label><textarea id="businessAddress" placeholder="Business address"></textarea></div>
+
+<div class="form-section">Customer details</div>
+<div class="grid2">
+<div class="field"><label>Customer name</label><input id="customerName" placeholder="Customer or company"></div>
+<div class="field"><label>Customer email</label><input id="customerEmail" type="email" placeholder="Customer email"></div>
+<div class="field"><label>Customer phone</label><input id="customerPhone" placeholder="Customer phone"></div>
+</div>
+<div class="field"><label>Customer address</label><textarea id="customerAddress" placeholder="Customer address"></textarea></div>
+
+<div class="form-section">Services or products</div>
+<div id="items"></div>
+<button class="btn light" onclick="addItem()">+ Add line item</button>
+<div class="grid2" style="margin-top:20px">
+<div class="field"><label>Tax rate (%)</label><input id="taxRate" type="number" min="0" step="0.01" value="0" oninput="calculate()"></div>
+<div class="field"><label>Discount amount</label><input id="discount" type="number" min="0" step="0.01" value="0" oninput="calculate()"></div>
+</div>
+<div class="total-box">
+<div class="total-line"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
+<div class="total-line"><span>Discount</span><strong id="discountTotal">$0.00</strong></div>
+<div class="total-line"><span>Tax</span><strong id="taxTotal">$0.00</strong></div>
+<div class="total-line final"><span>Total</span><strong id="grandTotal">$0.00</strong></div>
+</div>
+
+<div class="form-section">Additional information</div>
+<div class="field"><label>Payment instructions</label><textarea id="paymentInfo" placeholder="Payment method, bank details or instructions"></textarea></div>
+<div class="field"><label>Notes / terms</label><textarea id="notes" placeholder="Thank you for your business."></textarea></div>
+<div class="actions">
+<button class="btn primary" onclick="saveDocument()">Save document</button>
+<button class="btn gold" onclick="previewDocument()">Preview & print</button>
+<button class="btn light" onclick="closeEditor()">Cancel</button>
+</div>
+</div>
+<div id="previewArea" class="preview hidden"></div>
+</div>
 </section>
 
 <section class="page" id="business">
-  <h1>Business profile</h1>
-  <p class="sub">Save your business details so you don't have to enter them every time.</p>
-  <div class="panel">
-    <div class="field"><label>Business name</label><input id="profileName" placeholder="Your business name"></div>
-    <div class="grid2">
-      <div class="field"><label>Email</label><input id="profileEmail" type="email" placeholder="hello@example.com"></div>
-      <div class="field"><label>Phone</label><input id="profilePhone" placeholder="Phone number"></div>
-    </div>
-    <div class="field"><label>Address</label><textarea id="profileAddress" placeholder="Business address"></textarea></div>
-    <div class="field"><label>Default currency</label><select id="profileCurrency"><option value="CAD">CAD</option><option value="USD">USD</option><option value="GBP">GBP</option><option value="NGN">NGN</option><option value="EUR">EUR</option></select></div>
-    <button class="btn primary" onclick="saveProfile()">Save business profile</button>
-  </div>
+<h1>Business profile</h1>
+<p class="sub">Save your business details so you don't have to enter them every time.</p>
+<div class="panel">
+<div class="field"><label>Business name</label><input id="profileName" placeholder="Your business name"></div>
+<div class="grid2">
+<div class="field"><label>Email</label><input id="profileEmail" type="email" placeholder="hello@example.com"></div>
+<div class="field"><label>Phone</label><input id="profilePhone" placeholder="Phone number"></div>
+</div>
+<div class="field"><label>Address</label><textarea id="profileAddress" placeholder="Business address"></textarea></div>
+<div class="field"><label>Default currency</label><select id="profileCurrency"></select></div>
+<button class="btn primary" onclick="saveProfile()">Save business profile</button>
+</div>
 </section>
 </main>
 <footer>ZOVRA · BUSINESS, SIMPLIFIED.</footer>
 
 <script>
-const STORAGE_KEY = "zovra_documents";
-const PROFILE_KEY = "zovra_profile";
-let documents = loadDocuments();
-let profile = loadProfile();
-let editingId = null;
-let currentItems = [];
+"use strict";
+const STORAGE_KEY="zovra_documents";
+const PROFILE_KEY="zovra_profile";
+let documents=loadDocuments();
+let profile=loadProfile();
+let editingId=null;
 
-function loadDocuments(){
-  try {
-    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    return Array.isArray(data) ? data.map(d => ({
-      ...d,
-      id:d.id || ("doc-" + Math.random().toString(36).slice(2)),
-      type:d.type || d.docType || "Quotation",
-      number:d.number || d.docNumber || "QT-001",
-      status:d.status || "Unpaid",
-      date:d.date || d.docDate || today(),
-      dueDate:d.dueDate || "",
-      items:Array.isArray(d.items) ? d.items : [],
-      taxRate:Number(d.taxRate || 0),
-      discount:Number(d.discount || 0)
-    })) : [];
-  } catch(e) { return []; }
+const fallbackCurrencies=[
+" AED","AFN","ALL","AMD","ANG","AOA","ARS","AUD","AWG","AZN",
+"BAM","BBD","BDT","BGN","BHD","BIF","BMD","BND","BOB","BRL","BSD","BTN","BWP","BYN","BZD",
+"CAD","CDF","CHF","CLP","CNY","COP","CRC","CUP","CVE","CZK",
+"DJF","DKK","DOP","DZD",
+"EGP","ERN","ETB","EUR",
+"FJD","FKP",
+"GBP","GEL","GHS","GIP","GMD","GNF","GTQ","GYD",
+"HKD","HNL","HTG","HUF",
+"IDR","ILS","INR","IQD","IRR","ISK",
+"JMD","JOD","JPY",
+"KES","KGS","KHR","KMF","KPW","KRW","KWD","KYD","KZT",
+"LAK","LBP","LKR","LRD","LSL","LYD",
+"MAD","MDL","MGA","MKD","MMK","MNT","MOP","MRU","MUR","MVR","MWK","MXN","MYR","MZN",
+"NAD","NGN","NIO","NOK","NPR","NZD",
+"OMR",
+"PAB","PEN","PGK","PHP","PKR","PLN","PYG",
+"QAR",
+"RON","RSD","RUB","RWF",
+"SAR","SBD","SCR","SDG","SEK","SGD","SHP","SLE","SLL","SOS","SRD","SSP","STN","SVC","SYP","SZL",
+"THB","TJS","TMT","TND","TOP","TRY","TTD","TWD","TZS",
+"UAH","UGX","USD","UYU","UZS",
+"VED","VES","VND","VUV",
+"WST",
+"XAF","XAG","XAU","XBA","XBB","XBC","XBD","XCD","XCG","XDR","XOF","XPD","XPF","XPT","XSU","XTS","XUA","XXX",
+"YER",
+"ZAR","ZMW","ZWL"
+].map(x=>x.trim());
+
+function currencyCodes(){
+try{
+if(typeof Intl.supportedValuesOf==="function"){
+const list=Intl.supportedValuesOf("currency");
+if(list&&list.length>100)return [...new Set(list)].sort();
 }
-function loadProfile(){
-  try { return JSON.parse(localStorage.getItem(PROFILE_KEY) || "{}") || {}; }
-  catch(e){ return {}; }
+}catch(e){}
+return [...new Set(fallbackCurrencies)].sort();
 }
-function persist(){
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(documents));
+const CURRENCIES=currencyCodes();
+
+function currencyName(code){
+try{
+const names=new Intl.DisplayNames(["en"],{type:"currency"});
+return names.of(code)||code;
+}catch(e){return code;}
+}
+function populateCurrencySelects(){
+["currency","profileCurrency"].forEach(id=>{
+const el=document.getElementById(id);
+if(!el)return;
+const previous=el.value;
+el.innerHTML=CURRENCIES.map(code=>`<option value="${code}">${code} — ${escapeHTML(currencyName(code))}</option>`).join("");
+if(CURRENCIES.includes(previous))el.value=previous;
+else el.value="CAD";
+});
 }
 function today(){
-  const d=new Date();
-  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const d=new Date();
+return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 }
-function money(value,currency="CAD"){
-  try { return new Intl.NumberFormat("en-CA",{style:"currency",currency}).format(Number(value)||0); }
-  catch(e){ return currency+" "+(Number(value)||0).toFixed(2); }
+function loadDocuments(){
+try{
+const data=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+if(!Array.isArray(data))return [];
+return data.filter(d=>d&&typeof d==="object").map(d=>({
+...d,
+id:d.id||("doc-"+Math.random().toString(36).slice(2)),
+type:d.type==="Invoice"||d.docType==="Invoice"?"Invoice":"Quotation",
+number:d.number||d.docNumber||"QT-001",
+status:["Paid","Unpaid","Draft"].includes(d.status)?d.status:"Unpaid",
+date:d.date||d.docDate||today(),
+dueDate:d.dueDate||"",
+items:Array.isArray(d.items)?d.items:[],
+currency:d.currency||"CAD",
+taxRate:Number(d.taxRate)||0,
+discount:Number(d.discount)||0,
+total:Number(d.total)||0
+}));
+}catch(e){return [];}
+}
+function loadProfile(){
+try{return JSON.parse(localStorage.getItem(PROFILE_KEY)||"{}")||{};}
+catch(e){return {};}
+}
+function persist(){
+try{localStorage.setItem(STORAGE_KEY,JSON.stringify(documents));return true;}
+catch(e){alert("ZOVRA could not save your data. Your browser storage may be full. Please download a backup and free some storage.");return false;}
+}
+function persistProfile(){
+try{localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));return true;}
+catch(e){alert("Your business profile could not be saved. Your browser storage may be full.");return false;}
 }
 function escapeHTML(value){
-  return String(value ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function money(value,currency="CAD"){
+const amount=Number(value)||0;
+try{return new Intl.NumberFormat(undefined,{style:"currency",currency:currency,maximumFractionDigits:2}).format(amount);}
+catch(e){return currency+" "+amount.toFixed(2);}
 }
 function go(page){
-  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-  document.getElementById(page).classList.add("active");
-  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
-  if(page==="dashboard") renderDashboard();
-  if(page==="documents") renderDocuments();
-  if(page==="business") fillProfile();
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById(page).classList.add("active");
+document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===page));
+if(page==="dashboard")renderDashboard();
+if(page==="documents")renderDocuments();
+if(page==="business")fillProfile();
 }
 document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
 
 function numberFor(type){
-  const prefix=type==="Invoice"?"INV":"QT";
-  const nums=documents.filter(d=>d.type===type).map(d=>{
-    const match=String(d.number||"").match(/(\d+)$/);
-    return match?Number(match[1]):0;
-  });
-  return prefix+"-"+String(Math.max(0,...nums)+1).padStart(3,"0");
+const prefix=type==="Invoice"?"INV":"QT";
+const nums=documents.filter(d=>d.type===type).map(d=>{
+const match=String(d.number||"").match(/(\d+)$/);
+return match?Number(match[1]):0;
+});
+return prefix+"-"+String(Math.max(0,...nums)+1).padStart(3,"0");
 }
 function updateNumberPreview(){
-  if(!editingId) document.getElementById("docNumber").value=numberFor(document.getElementById("docType").value);
+if(!editingId)document.getElementById("docNumber").value=numberFor(document.getElementById("docType").value);
+}
+function openEditorPosition(){
+go("documents");
+document.getElementById("editor").classList.add("active");
+requestAnimationFrame(()=>document.getElementById("editor").scrollIntoView({behavior:"smooth",block:"start"}));
 }
 function newDocument(){
-  editingId=null;
-  currentItems=[];
-  document.getElementById("editorTitle").textContent="Create a document";
-  clearEditor();
-  document.getElementById("docDate").value=today();
-  document.getElementById("docType").value="Quotation";
-  document.getElementById("docStatus").value="Unpaid";
-  document.getElementById("dueDate").value="";
-  document.getElementById("discount").value=0;
-  document.getElementById("taxRate").value=0;
-  document.getElementById("paymentInfo").value="";
-  document.getElementById("notes").value="";
-  applyProfile();
-  updateNumberPreview();
-  addItem();
-  document.getElementById("previewArea").classList.add("hidden");
-  document.getElementById("editor").classList.add("active");
-  document.getElementById("editor").scrollIntoView({behavior:"smooth"});
-  go("documents");
-  document.getElementById("editor").classList.add("active");
+editingId=null;
+document.getElementById("editorTitle").textContent="Create a document";
+clearEditor();
+document.getElementById("docDate").value=today();
+document.getElementById("docType").value="Quotation";
+document.getElementById("docStatus").value="Unpaid";
+document.getElementById("dueDate").value="";
+document.getElementById("discount").value=0;
+document.getElementById("taxRate").value=0;
+document.getElementById("paymentInfo").value="";
+document.getElementById("notes").value="";
+applyProfile();
+updateNumberPreview();
+addItem();
+document.getElementById("previewArea").classList.add("hidden");
+openEditorPosition();
 }
 function clearEditor(){
-  ["businessName","businessEmail","businessPhone","businessAddress","customerName","customerEmail","customerPhone","customerAddress","docNumber","docDate","dueDate","paymentInfo","notes"].forEach(id=>document.getElementById(id).value="");
-  document.getElementById("items").innerHTML="";
+["businessName","businessEmail","businessPhone","businessAddress","customerName","customerEmail","customerPhone","customerAddress","docNumber","docDate","dueDate","paymentInfo","notes"].forEach(id=>document.getElementById(id).value="");
+document.getElementById("items").innerHTML="";
 }
 function applyProfile(){
-  document.getElementById("businessName").value=profile.name||"";
-  document.getElementById("businessEmail").value=profile.email||"";
-  document.getElementById("businessPhone").value=profile.phone||"";
-  document.getElementById("businessAddress").value=profile.address||"";
-  document.getElementById("currency").value=profile.currency||"CAD";
+document.getElementById("businessName").value=profile.name||"";
+document.getElementById("businessEmail").value=profile.email||"";
+document.getElementById("businessPhone").value=profile.phone||"";
+document.getElementById("businessAddress").value=profile.address||"";
+document.getElementById("currency").value=profile.currency||"CAD";
 }
 function addItem(item={description:"",quantity:1,price:0}){
-  const row=document.createElement("div");
-  row.className="item-row";
-  row.innerHTML=`
-    <div class="description"><label>Description</label><input class="item-desc" placeholder="Service or product" value="${escapeHTML(item.description)}"></div>
-    <div><label>Qty</label><input class="item-qty" type="number" min="0" step="any" value="${Number(item.quantity)||1}"></div>
-    <div><label>Unit price</label><input class="item-price" type="number" min="0" step="0.01" value="${Number(item.price)||0}"></div>
-    <div><label>Amount</label><input class="item-amount" readonly value="0.00"></div>
-    <button class="smallbtn danger remove-item" type="button">×</button>`;
-  row.querySelectorAll("input").forEach(input=>input.addEventListener("input",calculate));
-  row.querySelector(".remove-item").addEventListener("click",()=>{row.remove();calculate();});
-  document.getElementById("items").appendChild(row);
-  calculate();
+const row=document.createElement("div");
+row.className="item-row";
+row.innerHTML=`
+<div class="description"><label>Description</label><input class="item-desc" placeholder="Service or product" value="${escapeHTML(item.description)}"></div>
+<div><label>Qty</label><input class="item-qty" type="number" min="0" step="any" value="${Number(item.quantity??1)}"></div>
+<div><label>Unit price</label><input class="item-price" type="number" min="0" step="0.01" value="${Number(item.price)||0}"></div>
+<div><label>Amount</label><input class="item-amount" readonly value="0.00"></div>
+<button class="smallbtn danger remove-item" type="button">×</button>`;
+row.querySelectorAll("input").forEach(input=>input.addEventListener("input",calculate));
+row.querySelector(".remove-item").addEventListener("click",()=>{row.remove();calculate();});
+document.getElementById("items").appendChild(row);
+calculate();
 }
 function getItems(){
-  return [...document.querySelectorAll(".item-row")].map(row=>({
-    description:row.querySelector(".item-desc").value,
-    quantity:Number(row.querySelector(".item-qty").value)||0,
-    price:Number(row.querySelector(".item-price").value)||0
-  }));
+return [...document.querySelectorAll(".item-row")].map(row=>({
+description:row.querySelector(".item-desc").value,
+quantity:Math.max(0,Number(row.querySelector(".item-qty").value)||0),
+price:Math.max(0,Number(row.querySelector(".item-price").value)||0)
+}));
 }
 function totals(items=getItems(),taxRate=Number(document.getElementById("taxRate").value)||0,discount=Number(document.getElementById("discount").value)||0){
-  const subtotal=items.reduce((sum,i)=>sum+(i.quantity*i.price),0);
-  const actualDiscount=Math.min(Math.max(0,discount),subtotal);
-  const tax=Math.max(0,subtotal-actualDiscount)*Math.max(0,taxRate)/100;
-  return {subtotal,discount:actualDiscount,tax,total:subtotal-actualDiscount+tax};
+const subtotal=items.reduce((sum,i)=>sum+(i.quantity*i.price),0);
+const actualDiscount=Math.min(Math.max(0,discount),subtotal);
+const tax=Math.max(0,subtotal-actualDiscount)*Math.max(0,taxRate)/100;
+return {subtotal,discount:actualDiscount,tax,total:subtotal-actualDiscount+tax};
 }
 function calculate(){
-  const items=getItems();
-  document.querySelectorAll(".item-row").forEach((row,i)=>{
-    const item=items[i];
-    row.querySelector(".item-amount").value=(item.quantity*item.price).toFixed(2);
-  });
-  const t=totals(items);
-  const currency=document.getElementById("currency").value;
-  document.getElementById("subtotal").textContent=money(t.subtotal,currency);
-  document.getElementById("discountTotal").textContent=money(t.discount,currency);
-  document.getElementById("taxTotal").textContent=money(t.tax,currency);
-  document.getElementById("grandTotal").textContent=money(t.total,currency);
+const items=getItems();
+document.querySelectorAll(".item-row").forEach((row,i)=>{
+row.querySelector(".item-amount").value=(items[i].quantity*items[i].price).toFixed(2);
+});
+const t=totals(items);
+const currency=document.getElementById("currency").value||"CAD";
+document.getElementById("subtotal").textContent=money(t.subtotal,currency);
+document.getElementById("discountTotal").textContent=money(t.discount,currency);
+document.getElementById("taxTotal").textContent=money(t.tax,currency);
+document.getElementById("grandTotal").textContent=money(t.total,currency);
 }
 function collectDocument(){
-  const items=getItems();
-  const t=totals(items);
-  const type=document.getElementById("docType").value;
-  return {
-    id:editingId||("doc-"+Date.now()),
-    type,
-    number:editingId ? document.getElementById("docNumber").value : numberFor(type),
-    date:document.getElementById("docDate").value||today(),
-    dueDate:document.getElementById("dueDate").value,
-    status:document.getElementById("docStatus").value,
-    businessName:document.getElementById("businessName").value,
-    businessEmail:document.getElementById("businessEmail").value,
-    businessPhone:document.getElementById("businessPhone").value,
-    businessAddress:document.getElementById("businessAddress").value,
-    customerName:document.getElementById("customerName").value,
-    customerEmail:document.getElementById("customerEmail").value,
-    customerPhone:document.getElementById("customerPhone").value,
-    customerAddress:document.getElementById("customerAddress").value,
-    currency:document.getElementById("currency").value,
-    items,
-    taxRate:Number(document.getElementById("taxRate").value)||0,
-    discount:Number(document.getElementById("discount").value)||0,
-    subtotal:t.subtotal,tax:t.tax,total:t.total,
-    paymentInfo:document.getElementById("paymentInfo").value,
-    notes:document.getElementById("notes").value
-  };
+const items=getItems(),t=totals(items);
+const type=document.getElementById("docType").value;
+return {
+id:editingId||("doc-"+Date.now()+"-"+Math.random().toString(36).slice(2,7)),
+type,
+number:editingId?document.getElementById("docNumber").value:numberFor(type),
+date:document.getElementById("docDate").value||today(),
+dueDate:document.getElementById("dueDate").value,
+status:document.getElementById("docStatus").value,
+businessName:document.getElementById("businessName").value,
+businessEmail:document.getElementById("businessEmail").value,
+businessPhone:document.getElementById("businessPhone").value,
+businessAddress:document.getElementById("businessAddress").value,
+customerName:document.getElementById("customerName").value,
+customerEmail:document.getElementById("customerEmail").value,
+customerPhone:document.getElementById("customerPhone").value,
+customerAddress:document.getElementById("customerAddress").value,
+currency:document.getElementById("currency").value||"CAD",
+items,taxRate:Number(document.getElementById("taxRate").value)||0,
+discount:Number(document.getElementById("discount").value)||0,
+subtotal:t.subtotal,tax:t.tax,total:t.total,
+paymentInfo:document.getElementById("paymentInfo").value,
+notes:document.getElementById("notes").value
+};
 }
 function saveDocument(){
-  const doc=collectDocument();
-  if(!doc.customerName.trim()){
-    alert("Please enter a customer name.");
-    document.getElementById("customerName").focus();
-    return;
-  }
-  if(!doc.items.some(i=>i.description.trim())){
-    alert("Please add at least one service or product.");
-    return;
-  }
-  if(!editingId && documents.some(d=>d.number===doc.number)){
-    alert("That document number already exists. Please try again.");
-    return;
-  }
-  const index=documents.findIndex(d=>d.id===doc.id);
-  if(index>=0) documents[index]=doc;
-  else documents.unshift(doc);
-  editingId=doc.id;
-  persist();
-  alert("Document saved successfully.");
-  renderDocuments();
-  renderDashboard();
-  document.getElementById("editorTitle").textContent="Edit "+doc.number;
+const doc=collectDocument();
+if(!doc.customerName.trim()){alert("Please enter a customer name.");document.getElementById("customerName").focus();return;}
+if(!doc.items.some(i=>i.description.trim())){alert("Please add at least one service or product.");return;}
+if(!editingId&&documents.some(d=>d.number===doc.number)){alert("That document number already exists. Please try again.");return;}
+const oldDocuments=documents.slice();
+const index=documents.findIndex(d=>d.id===doc.id);
+if(index>=0)documents[index]=doc;else documents.unshift(doc);
+if(!persist()){documents=oldDocuments;return;}
+editingId=doc.id;
+alert("Document saved successfully.");
+document.getElementById("editorTitle").textContent="Edit "+doc.number;
+renderDocuments();renderDashboard();
 }
 function closeEditor(){
-  document.getElementById("editor").classList.remove("active");
-  document.getElementById("previewArea").classList.add("hidden");
-  renderDocuments();
+document.getElementById("editor").classList.remove("active");
+document.getElementById("previewArea").classList.add("hidden");
+renderDocuments();
+document.getElementById("documentList").scrollIntoView({behavior:"smooth",block:"start"});
 }
 function editDocument(id){
-  const d=documents.find(x=>x.id===id);
-  if(!d)return;
-  editingId=d.id;
-  clearEditor();
-  document.getElementById("editorTitle").textContent="Edit "+d.number;
-  const fields={
-    docType:d.type,docNumber:d.number,docDate:d.date,dueDate:d.dueDate,
-    docStatus:d.status,businessName:d.businessName,businessEmail:d.businessEmail,
-    businessPhone:d.businessPhone,businessAddress:d.businessAddress,
-    customerName:d.customerName,customerEmail:d.customerEmail,
-    customerPhone:d.customerPhone,customerAddress:d.customerAddress,
-    currency:d.currency||"CAD",taxRate:d.taxRate||0,discount:d.discount||0,
-    paymentInfo:d.paymentInfo,notes:d.notes
-  };
-  Object.entries(fields).forEach(([id,value])=>{
-    const el=document.getElementById(id);
-    if(el)el.value=value??"";
-  });
-  currentItems=d.items||[];
-  currentItems.forEach(i=>addItem(i));
-  if(!currentItems.length)addItem();
-  calculate();
-  document.getElementById("previewArea").classList.add("hidden");
-  document.getElementById("editor").classList.add("active");
-  document.getElementById("editor").scrollIntoView({behavior:"smooth"});
+const d=documents.find(x=>x.id===id);
+if(!d)return;
+editingId=d.id;
+clearEditor();
+document.getElementById("editorTitle").textContent="Edit "+d.number;
+const fields={
+docType:d.type,docNumber:d.number,docDate:d.date,dueDate:d.dueDate,
+docStatus:d.status,businessName:d.businessName,businessEmail:d.businessEmail,
+businessPhone:d.businessPhone,businessAddress:d.businessAddress,
+customerName:d.customerName,customerEmail:d.customerEmail,
+customerPhone:d.customerPhone,customerAddress:d.customerAddress,
+currency:d.currency||"CAD",taxRate:d.taxRate||0,discount:d.discount||0,
+paymentInfo:d.paymentInfo,notes:d.notes
+};
+Object.entries(fields).forEach(([id,value])=>{
+const el=document.getElementById(id);if(el)el.value=value??"";
+});
+(d.items||[]).forEach(i=>addItem(i));
+if(!(d.items||[]).length)addItem();
+calculate();
+document.getElementById("previewArea").classList.add("hidden");
+openEditorPosition();
 }
 function deleteDocument(id){
-  if(!confirm("Delete this document permanently from this browser?"))return;
-  documents=documents.filter(d=>d.id!==id);
-  persist();renderDocuments();renderDashboard();
+if(!confirm("Delete this document permanently from this browser?"))return;
+const old=documents.slice();
+documents=documents.filter(d=>d.id!==id);
+if(!persist()){documents=old;return;}
+renderDocuments();renderDashboard();
 }
 function markStatus(id,status){
-  const d=documents.find(x=>x.id===id);
-  if(!d)return;
-  d.status=status;persist();renderDocuments();renderDashboard();
+const d=documents.find(x=>x.id===id);if(!d)return;
+const old=d.status;d.status=status;
+if(!persist()){d.status=old;return;}
+renderDocuments();renderDashboard();
 }
 function effectiveStatus(d){
-  if(d.status==="Paid"||d.status==="Draft")return d.status;
-  if(d.dueDate && d.dueDate<today())return "Overdue";
-  return "Unpaid";
+if(d.status==="Paid"||d.status==="Draft")return d.status;
+if(d.dueDate&&d.dueDate<today())return "Overdue";
+return "Unpaid";
 }
 function statusBadge(status){
-  return `<span class="status ${status.toLowerCase()}">${escapeHTML(status)}</span>`;
+return `<span class="status ${status.toLowerCase()}">${escapeHTML(status)}</span>`;
 }
 function rowHTML(d){
-  const status=effectiveStatus(d);
-  return `<tr>
-    <td><strong>${escapeHTML(d.number)}</strong><br><small>${escapeHTML(d.type)}</small></td>
-    <td>${escapeHTML(d.customerName||"—")}</td>
-    <td>${escapeHTML(d.date||"—")}</td>
-    <td>${money(d.total,d.currency||"CAD")}</td>
-    <td>${statusBadge(status)}</td>
-    <td><div class="actions">
-      <button class="smallbtn" onclick="editDocument('${d.id}')">Edit</button>
-      <button class="smallbtn" onclick="printSaved('${d.id}')">Print</button>
-      <button class="smallbtn danger" onclick="deleteDocument('${d.id}')">Delete</button>
-    </div></td>
-  </tr>`;
+const status=effectiveStatus(d);
+return `<tr>
+<td><strong>${escapeHTML(d.number)}</strong><br><small>${escapeHTML(d.type)}</small></td>
+<td>${escapeHTML(d.customerName||"—")}</td>
+<td>${escapeHTML(d.date||"—")}</td>
+<td>${money(d.total,d.currency||"CAD")}</td>
+<td>${statusBadge(status)}</td>
+<td><div class="actions">
+<button class="smallbtn" onclick="editDocument('${escapeHTML(d.id)}')">Edit</button>
+<button class="smallbtn" onclick="printSaved('${escapeHTML(d.id)}')">Print</button>
+<button class="smallbtn danger" onclick="deleteDocument('${escapeHTML(d.id)}')">Delete</button>
+</div></td></tr>`;
 }
 function tableHTML(list){
-  if(!list.length)return `<div class="empty">No documents yet. Create your first one to get started.</div>`;
-  return `<div class="table-wrap"><table><thead><tr><th>Document</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead><tbody>${list.map(rowHTML).join("")}</tbody></table></div>`;
+if(!list.length)return `<div class="empty">No documents yet. Create your first one to get started.</div>`;
+return `<div class="table-wrap"><table><thead><tr><th>Document</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead><tbody>${list.map(rowHTML).join("")}</tbody></table></div>`;
 }
 function renderDocuments(){
-  const search=(document.getElementById("searchDocs")?.value||"").toLowerCase();
-  const filter=document.getElementById("filterDocs")?.value||"all";
-  let list=[...documents].filter(d=>{
-    const match=(d.number+" "+d.customerName+" "+d.type).toLowerCase().includes(search);
-    const status=effectiveStatus(d);
-    const filterMatch=filter==="all"||d.type===filter||status===filter;
-    return match&&filterMatch;
-  }).sort((a,b)=>(b.date||"").localeCompare(a.date||""));
-  document.getElementById("documentList").innerHTML=tableHTML(list);
+const search=(document.getElementById("searchDocs")?.value||"").toLowerCase().trim();
+const filter=document.getElementById("filterDocs")?.value||"all";
+const sort=document.getElementById("sortDocs")?.value||"newest";
+let list=documents.filter(d=>{
+const match=(d.number+" "+d.customerName+" "+d.type).toLowerCase().includes(search);
+const status=effectiveStatus(d);
+return match&&(filter==="all"||d.type===filter||status===filter);
+});
+list.sort((a,b)=>{
+if(sort==="oldest")return (a.date||"").localeCompare(b.date||"");
+if(sort==="highest")return (Number(b.total)||0)-(Number(a.total)||0);
+if(sort==="lowest")return (Number(a.total)||0)-(Number(b.total)||0);
+return (b.date||"").localeCompare(a.date||"");
+});
+document.getElementById("documentList").innerHTML=tableHTML(list);
+}
+function currencyBreakdown(list){
+if(!list.length)return `<div class="empty" style="padding:8px 0">No records</div>`;
+const sums={};
+list.forEach(d=>{
+const code=d.currency||"CAD";
+sums[code]=(sums[code]||0)+(Number(d.total)||0);
+});
+return Object.keys(sums).sort().map(code=>`<div><span>${escapeHTML(code)}</span><strong>${money(sums[code],code)}</strong></div>`).join("");
 }
 function renderDashboard(){
-  const invoices=documents.filter(d=>d.type==="Invoice");
-  const invoiced=invoices.reduce((s,d)=>s+(Number(d.total)||0),0);
-  const paid=invoices.filter(d=>effectiveStatus(d)==="Paid").reduce((s,d)=>s+(Number(d.total)||0),0);
-  const due=invoices.filter(d=>["Unpaid","Overdue"].includes(effectiveStatus(d))).reduce((s,d)=>s+(Number(d.total)||0),0);
-  const currency=invoices[0]?.currency||profile.currency||"CAD";
-  document.getElementById("statDocs").textContent=documents.length;
-  document.getElementById("statInvoiced").textContent=money(invoiced,currency);
-  document.getElementById("statPaid").textContent=money(paid,currency);
-  document.getElementById("statDue").textContent=money(due,currency);
-  const recent=[...documents].sort((a,b)=>(b.date||"").localeCompare(a.date||"")).slice(0,5);
-  document.getElementById("recentList").innerHTML=tableHTML(recent);
+const invoices=documents.filter(d=>d.type==="Invoice");
+const quotes=documents.filter(d=>d.type==="Quotation");
+const paid=invoices.filter(d=>effectiveStatus(d)==="Paid");
+const due=invoices.filter(d=>["Unpaid","Overdue"].includes(effectiveStatus(d)));
+document.getElementById("statDocs").textContent=documents.length;
+document.getElementById("statQuotes").innerHTML=currencyBreakdown(quotes);
+document.getElementById("statInvoiced").innerHTML=currencyBreakdown(invoices);
+document.getElementById("statPaid").innerHTML=currencyBreakdown(paid);
+document.getElementById("statDue").innerHTML=currencyBreakdown(due);
+const recent=[...documents].sort((a,b)=>(b.date||"").localeCompare(a.date||"")).slice(0,5);
+document.getElementById("recentList").innerHTML=tableHTML(recent);
 }
 function saveProfile(){
-  profile={
-    name:document.getElementById("profileName").value,
-    email:document.getElementById("profileEmail").value,
-    phone:document.getElementById("profilePhone").value,
-    address:document.getElementById("profileAddress").value,
-    currency:document.getElementById("profileCurrency").value
-  };
-  localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));
-  alert("Business profile saved.");
+const old=profile;
+profile={
+name:document.getElementById("profileName").value,
+email:document.getElementById("profileEmail").value,
+phone:document.getElementById("profilePhone").value,
+address:document.getElementById("profileAddress").value,
+currency:document.getElementById("profileCurrency").value||"CAD"
+};
+if(!persistProfile()){profile=old;return;}
+alert("Business profile saved.");
 }
 function fillProfile(){
-  document.getElementById("profileName").value=profile.name||"";
-  document.getElementById("profileEmail").value=profile.email||"";
-  document.getElementById("profilePhone").value=profile.phone||"";
-  document.getElementById("profileAddress").value=profile.address||"";
-  document.getElementById("profileCurrency").value=profile.currency||"CAD";
+document.getElementById("profileName").value=profile.name||"";
+document.getElementById("profileEmail").value=profile.email||"";
+document.getElementById("profilePhone").value=profile.phone||"";
+document.getElementById("profileAddress").value=profile.address||"";
+document.getElementById("profileCurrency").value=profile.currency||"CAD";
 }
 function previewMarkup(d){
-  const t=totals(d.items||[],d.taxRate||0,d.discount||0);
-  const c=d.currency||"CAD";
-  return `<div class="preview-head">
-    <div><h2>ZOVRA</h2><p style="font-size:10px;letter-spacing:2px">BUSINESS, SIMPLIFIED.</p>
-      <strong>${escapeHTML(d.businessName||"Your business")}</strong><br>
-      ${escapeHTML(d.businessAddress||"")}<br>${escapeHTML(d.businessEmail||"")}<br>${escapeHTML(d.businessPhone||"")}
-    </div>
-    <div style="text-align:right"><h2>${escapeHTML(d.type.toUpperCase())}</h2>
-      <p>${escapeHTML(d.number)}</p><p>Issued: ${escapeHTML(d.date)}</p>
-      <p>Due: ${escapeHTML(d.dueDate||"—")}</p>
-      <p>${escapeHTML(effectiveStatus(d))}</p>
-    </div>
-  </div>
-  <div style="margin:25px 0"><small style="color:#817b72">BILL TO</small><h3>${escapeHTML(d.customerName||"Customer")}</h3>
-    ${escapeHTML(d.customerAddress||"")}<br>${escapeHTML(d.customerEmail||"")}<br>${escapeHTML(d.customerPhone||"")}
-  </div>
-  <table style="min-width:0"><thead><tr><th>Description</th><th>Qty</th><th>Unit price</th><th>Amount</th></tr></thead>
-  <tbody>${(d.items||[]).map(i=>`<tr><td>${escapeHTML(i.description)}</td><td>${i.quantity}</td><td>${money(i.price,c)}</td><td>${money(i.quantity*i.price,c)}</td></tr>`).join("")}</tbody></table>
-  <div class="total-box">
-    <div class="total-line"><span>Subtotal</span><strong>${money(t.subtotal,c)}</strong></div>
-    <div class="total-line"><span>Discount</span><strong>${money(t.discount,c)}</strong></div>
-    <div class="total-line"><span>Tax (${Number(d.taxRate)||0}%)</span><strong>${money(t.tax,c)}</strong></div>
-    <div class="total-line final"><span>Total</span><strong>${money(t.total,c)}</strong></div>
-  </div>
-  <div style="margin-top:35px;font-size:12px"><strong>Payment instructions</strong><p>${escapeHTML(d.paymentInfo||"—").replace(/\n/g,"<br>")}</p>
-  <strong>Notes / terms</strong><p>${escapeHTML(d.notes||"Thank you for your business.").replace(/\n/g,"<br>")}</p></div>`;
+const t=totals(d.items||[],d.taxRate||0,d.discount||0),c=d.currency||"CAD";
+return `<div class="preview-head">
+<div><h2>ZOVRA</h2><p style="font-size:10px;letter-spacing:2px">BUSINESS, SIMPLIFIED.</p>
+<strong>${escapeHTML(d.businessName||"Your business")}</strong><br>${escapeHTML(d.businessAddress||"")}<br>${escapeHTML(d.businessEmail||"")}<br>${escapeHTML(d.businessPhone||"")}</div>
+<div style="text-align:right"><h2>${escapeHTML(d.type.toUpperCase())}</h2><p>${escapeHTML(d.number)}</p>
+<p>Issued: ${escapeHTML(d.date)}</p><p>Due: ${escapeHTML(d.dueDate||"—")}</p><p>${escapeHTML(effectiveStatus(d))}</p></div></div>
+<div style="margin:25px 0"><small style="color:#817b72">BILL TO</small><h3>${escapeHTML(d.customerName||"Customer")}</h3>
+${escapeHTML(d.customerAddress||"")}<br>${escapeHTML(d.customerEmail||"")}<br>${escapeHTML(d.customerPhone||"")}</div>
+<table style="min-width:0"><thead><tr><th>Description</th><th>Qty</th><th>Unit price</th><th>Amount</th></tr></thead>
+<tbody>${(d.items||[]).map(i=>`<tr><td>${escapeHTML(i.description)}</td><td>${Number(i.quantity)||0}</td><td>${money(i.price,c)}</td><td>${money((Number(i.quantity)||0)*(Number(i.price)||0),c)}</td></tr>`).join("")}</tbody></table>
+<div class="total-box"><div class="total-line"><span>Subtotal</span><strong>${money(t.subtotal,c)}</strong></div>
+<div class="total-line"><span>Discount</span><strong>${money(t.discount,c)}</strong></div>
+<div class="total-line"><span>Tax (${Number(d.taxRate)||0}%)</span><strong>${money(t.tax,c)}</strong></div>
+<div class="total-line final"><span>Total</span><strong>${money(t.total,c)}</strong></div></div>
+<div style="margin-top:35px;font-size:12px"><strong>Payment instructions</strong><p>${escapeHTML(d.paymentInfo||"—").replace(/\n/g,"<br>")}</p>
+<strong>Notes / terms</strong><p>${escapeHTML(d.notes||"Thank you for your business.").replace(/\n/g,"<br>")}</p></div>`;
 }
 function previewDocument(){
-  const d=collectDocument();
-  document.getElementById("previewArea").innerHTML=previewMarkup(d);
-  document.getElementById("previewArea").classList.remove("hidden");
-  document.getElementById("previewArea").scrollIntoView({behavior:"smooth"});
+const d=collectDocument();
+document.getElementById("previewArea").innerHTML=previewMarkup(d);
+document.getElementById("previewArea").classList.remove("hidden");
+document.getElementById("previewArea").scrollIntoView({behavior:"smooth"});
 }
 function printSaved(id){
-  const d=documents.find(x=>x.id===id);
-  if(!d)return;
-  const win=window.open("","_blank");
-  if(!win){alert("Please allow pop-ups to print your document.");return;}
-  win.document.write(`<!DOCTYPE html><html><head><title>${escapeHTML(d.number)}</title><style>
-    body{font-family:Arial,sans-serif;color:#111;padding:35px}
-    .preview{max-width:850px;margin:auto}.preview-head{display:flex;justify-content:space-between;border-bottom:2px solid #111;padding-bottom:20px}
-    table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px 8px;border-bottom:1px solid #ddd;font-size:13px}
-    .total-box{margin-left:auto;max-width:300px;margin-top:20px}.total-line{display:flex;justify-content:space-between;padding:8px 0}
-    .final{border-top:1px solid #111;font-size:19px;font-weight:bold;padding-top:15px}
-  </style></head><body><div class="preview">${previewMarkup(d)}</div><script>window.onload=()=>window.print();<\/script></body></html>`);
-  win.document.close();
+const d=documents.find(x=>x.id===id);if(!d)return;
+const win=window.open("","_blank");
+if(!win){alert("Please allow pop-ups to print your document.");return;}
+win.document.write(`<!DOCTYPE html><html><head><title>${escapeHTML(d.number)}</title><style>
+body{font-family:Arial,sans-serif;color:#111;padding:35px}.preview{max-width:850px;margin:auto}
+.preview-head{display:flex;justify-content:space-between;border-bottom:2px solid #111;padding-bottom:20px}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:12px 8px;border-bottom:1px solid #ddd;font-size:13px}
+.total-box{margin-left:auto;max-width:300px;margin-top:20px}.total-line{display:flex;justify-content:space-between;padding:8px 0}
+.final{border-top:1px solid #111;font-size:19px;font-weight:bold;padding-top:15px}
+</style></head><body><div class="preview">${previewMarkup(d)}</div><script>window.onload=()=>window.print();<\/script></body></html>`);
+win.document.close();
 }
+
+/* BACKUP AND RESTORE */
+function exportBackup(){
+const backup={
+app:"ZOVRA",
+formatVersion:3,
+exportedAt:new Date().toISOString(),
+documents:documents,
+profile:profile
+};
+const blob=new Blob([JSON.stringify(backup,null,2)],{type:"application/json"});
+const url=URL.createObjectURL(blob);
+const a=document.createElement("a");
+a.href=url;
+a.download="zovra-backup-"+today()+".json";
+document.body.appendChild(a);a.click();a.remove();
+URL.revokeObjectURL(url);
+}
+function validBackup(data){
+return !!(data&&typeof data==="object"&&!Array.isArray(data)&&
+Array.isArray(data.documents)&&data.profile&&typeof data.profile==="object"&&!Array.isArray(data.profile));
+}
+async function importBackup(event){
+const file=event.target.files&&event.target.files[0];
+if(!file)return;
+try{
+const text=await file.text();
+const backup=JSON.parse(text);
+if(!validBackup(backup)){
+alert("This file doesn't look like a valid ZOVRA backup. Your current data has not been changed.");
+return;
+}
+if(!confirm("Restoring this backup will replace the documents and business profile currently saved in this browser. Download a backup of your current data first if you want to keep it. Continue?"))return;
+const restoredDocs=backup.documents.map((d,index)=>({
+...d,
+id:d.id||("restored-"+Date.now()+"-"+index),
+type:d.type==="Invoice"?"Invoice":"Quotation",
+number:String(d.number||d.docNumber||("QT-"+String(index+1).padStart(3,"0"))),
+status:["Paid","Unpaid","Draft"].includes(d.status)?d.status:"Unpaid",
+date:d.date||d.docDate||today(),
+dueDate:d.dueDate||"",
+currency:d.currency||"CAD",
+items:Array.isArray(d.items)?d.items:[],
+taxRate:Number(d.taxRate)||0,
+discount:Number(d.discount)||0,
+total:Number(d.total)||0
+}));
+const restoredProfile=backup.profile||{};
+const previousDocs=documents,previousProfile=profile;
+try{
+localStorage.setItem(STORAGE_KEY,JSON.stringify(restoredDocs));
+localStorage.setItem(PROFILE_KEY,JSON.stringify(restoredProfile));
+documents=restoredDocs;profile=restoredProfile;
+}catch(storageError){
+try{
+localStorage.setItem(STORAGE_KEY,JSON.stringify(previousDocs));
+localStorage.setItem(PROFILE_KEY,JSON.stringify(previousProfile));
+}catch(rollbackError){}
+alert("Your browser could not store the restored backup. Your previous data has been kept where possible. Try freeing browser storage and restoring again.");
+return;
+}
+renderDashboard();renderDocuments();fillProfile();
+alert("Your ZOVRA backup has been restored successfully.");
+}catch(error){
+alert("ZOVRA couldn't read that backup file. Please choose a valid ZOVRA JSON backup.");
+}finally{
+event.target.value="";
+}
+}
+
+/* STARTUP */
+populateCurrencySelects();
 renderDashboard();
 renderDocuments();
 fillProfile();

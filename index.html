@@ -120,7 +120,7 @@ footer{text-align:center;padding:25px;color:var(--muted);font-size:11px}
   <div class="tagline">BUSINESS, SIMPLIFIED.</div>
  </div>
  <div class="header-right">
-  <span id="accountStatus">Guest mode · Saved on this device</span>
+  <span id="accountStatus"> </span>
   <button class="account-btn" id="accountButton" onclick="openAccount()">Log in / Sign up</button>
  </div>
 </header>
@@ -838,7 +838,7 @@ function updateHeader(){
   button.textContent="My account";
   document.getElementById("storageNotice").textContent="Your documents are saved on this device and synced to your ZOVRA cloud account.";
  }else{
-  status.textContent="Guest mode · Saved on this device";
+  status.textContent="";
   button.textContent="Log in / Sign up";
   document.getElementById("storageNotice").textContent="Guest documents are saved in this browser. Log in to enable cloud storage and syncing.";
  }

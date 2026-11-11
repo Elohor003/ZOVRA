@@ -923,22 +923,45 @@ function updateHeader(){
   document.getElementById("storageNotice").textContent="Guest documents are saved in this browser. Log in to enable cloud storage and syncing.";
  }
 }
+
+let activatingUserId = null;
+
 async function activateUser(user){
- if(!user||!sb)return;
+  if(!user||!sb)return;
 
- currentUser=user;
- cloudReady=false;
- updateHeader();
- updateAccountModal();
+  // Prevent the same account from loading twice simultaneously.
+  if(activatingUserId===user.id)return;
 
- // Save guest information only if it has not already been recorded.
- if(localStorage.getItem(GUEST_DOCS_KEY)===null){
-  localStorage.setItem(GUEST_DOCS_KEY,JSON.stringify(documents));
- }
+  activatingUserId=user.id;
 
- if(localStorage.getItem(GUEST_PROFILE_KEY)===null){
-  localStorage.setItem(GUEST_PROFILE_KEY,JSON.stringify(profile));
- }
+  try{
+    currentUser=user;
+    cloudReady=false;
+    updateHeader();
+    updateAccountModal();
+
+    if(localStorage.getItem(GUEST_DOCS_KEY)===null){
+      localStorage.setItem(
+        GUEST_DOCS_KEY,
+        JSON.stringify(documents)
+      );
+    }
+
+    if(localStorage.getItem(GUEST_PROFILE_KEY)===null){
+      localStorage.setItem(
+        GUEST_PROFILE_KEY,
+        JSON.stringify(profile)
+      );
+    }
+
+    await loadCloudData();
+
+  }finally{
+    activatingUserId=null;
+  }
+}
+
+
 
  await loadCloudData();
 }

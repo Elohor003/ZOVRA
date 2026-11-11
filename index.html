@@ -865,6 +865,7 @@ async function loadCloudData(){
    sb.from("zovra_documents").select("document_key,document_data").eq("user_id",currentUser.id),
    sb.from("zovra_profiles").select("profile_data").eq("user_id",currentUser.id).maybeSingle()
   ]);
+
   if(docsResult.error)throw docsResult.error;
   if(profileResult.error)throw profileResult.error;
 
@@ -873,19 +874,34 @@ async function loadCloudData(){
   const cloudProfile=profileResult.data?.profile_data||{};
   const guestProfile=JSON.parse(localStorage.getItem(GUEST_PROFILE_KEY)||"{}");
 
+  let shouldSyncGuestProfile=false;
+
   if(guestDocs.length){
    const merge=confirm("We found "+guestDocs.length+" document(s) saved in guest mode. Would you like to add them to your cloud account? Existing cloud documents will be kept.");
+
    if(merge){
     const merged=[...cloudDocs];
-    guestDocs.forEach(doc=>{
-     const collision=merged.some(x=>x.id===doc.id);
-     merged.push(collision?{...doc,id:"migrated-"+Date.now()+"-"+Math.random().toString(36).slice(2,7)}:doc);
-    });
-    documents=merged;
-    for(const doc of guestDocs){
-     const copy=documents.find(x=>x.id===doc.id)||documents.find(x=>x.number===doc.number&&x.customerName===doc.customerName);
-     if(copy)await saveCloudDocument(copy);
+    const cloudIds=new Set(cloudDocs.map(doc=>String(doc.id)));
+
+    for(let i=0;i<guestDocs.length;i++){
+     const guestDoc=guestDocs[i];
+     const originalId=String(guestDoc.id??("document-"+i));
+     const migratedId="guest-"+originalId;
+
+     if(cloudIds.has(migratedId))continue;
+
+     const copy={...guestDoc,id:migratedId};
+     await saveCloudDocument(copy);
+
+     merged.push(copy);
+     cloudIds.add(migratedId);
     }
+
+    documents=merged;
+
+    // Clear guest documents only after successful cloud saving.
+    localStorage.removeItem(GUEST_DOCS_KEY);
+
    }else{
     documents=cloudDocs;
    }
@@ -897,15 +913,25 @@ async function loadCloudData(){
    profile=cloudProfile;
   }else if(Object.keys(guestProfile).length){
    profile=guestProfile;
-   await queueCloudProfile();
+   shouldSyncGuestProfile=true;
   }else{
    profile={};
   }
 
   localStorage.setItem(STORAGE_KEY,JSON.stringify(documents));
   localStorage.setItem(PROFILE_KEY,JSON.stringify(profile));
+
   cloudReady=true;
-  updateHeader();renderDashboard();renderDocuments();fillProfile();
+
+  if(shouldSyncGuestProfile){
+   queueCloudProfile();
+  }
+
+  updateHeader();
+  renderDashboard();
+  renderDocuments();
+  fillProfile();
+
  }catch(e){
   cloudReady=false;
   alert("We couldn't load your cloud documents: "+e.message+". Your browser data has not been deleted. Please try Sync again.");

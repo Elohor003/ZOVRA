@@ -882,8 +882,10 @@ function openAccount(){
  updateAccountModal();
 }
 function closeAccount(){document.getElementById("accountModal").classList.remove("show")}
+
 function updateAccountModal(){
- const logged=!!currentUser;
+  const logged=!!currentUser;
+
  document.getElementById("authForm").classList.toggle("hidden",logged);
  document.getElementById("loggedInPanel").classList.toggle("hidden",!logged);
  document.getElementById("authTitle").textContent=logged?"Your ZOVRA account":"Welcome to ZOVRA";

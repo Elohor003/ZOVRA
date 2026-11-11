@@ -882,7 +882,6 @@ async function submitAuth(mode){
    alert("Your account request was received. Check your email for a confirmation link, then return to ZOVRA and log in.");
   }else{
    closeAccount();
-   await activateUser(result.data.user);
   }
  }catch(e){alert("Account error: "+e.message)}
  finally{authBusy=false}

@@ -615,17 +615,46 @@ function editDocument(id){
  document.getElementById("previewArea").classList.add("hidden");
  openEditorPosition();
 }
+
 async function deleteDocument(id){
- if(!confirm("Delete this document permanently?"))return;
- const old=documents.slice();
- documents=documents.filter(d=>d.id!==id);
- if(!persist()){documents=old;return}
- if(currentUser){
-  const {error}=await sb.from("zovra_documents").delete().eq("user_id",currentUser.id).eq("document_key",id);
-  if(error)alert("Deleted from this browser, but cloud deletion failed: "+error.message);
- }
- renderDocuments();renderDashboard();
+  if(!confirm("Delete this document permanently?"))return;
+
+  const old = documents.slice();
+
+  // If signed in, delete from the cloud first.
+  if(currentUser){
+    const {data,error} = await sb
+      .from("zovra_documents")
+      .delete()
+      .eq("user_id",currentUser.id)
+      .eq("document_key",id)
+      .select("document_key");
+
+    if(error){
+      alert("Cloud deletion failed: " + error.message);
+      return;
+    }
+
+    if(!data || data.length === 0){
+      alert("The document was not deleted from your cloud account. Please check your Supabase DELETE permission.");
+      return;
+    }
+  }
+
+  // Only remove it locally after cloud deletion succeeds.
+  documents = documents.filter(d => d.id !== id);
+
+  if(!persist()){
+    documents = old;
+    alert("The document was deleted from the cloud, but this browser could not save the updated list. Please sync again.");
+    return;
+  }
+
+  renderDocuments();
+  renderDashboard();
 }
+
+
 async function markStatus(id,status){
  const d=documents.find(x=>x.id===id);if(!d)return;
  const old=d.status;d.status=status;

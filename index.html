@@ -1006,6 +1006,89 @@ async function activateUser(user){
 
 
 
+let documentSaveTimer = null;
+let documentSaveQueue = Promise.resolve();
+
+function queueCloudDocuments(){
+  if(!currentUser || !sb || !cloudReady)return;
+
+  const userId=currentUser.id;
+  clearTimeout(documentSaveTimer);
+
+  documentSaveTimer=setTimeout(()=>{
+    documentSaveQueue=documentSaveQueue.then(async()=>{
+      if(!currentUser || currentUser.id!==userId || !sb || !cloudReady)return;
+
+      const rows=documents.map(doc=>({
+        user_id:userId,
+        document_key:String(doc.id),
+        document_data:doc,
+        updated_at:new Date().toISOString()
+      }));
+
+      if(!rows.length)return;
+
+      const {error}=await sb
+        .from("zovra_documents")
+        .upsert(rows,{
+          onConflict:"user_id,document_key"
+        });
+
+      if(error)throw error;
+
+    }).catch(error=>{
+      console.error("ZOVRA cloud document save failed:",error);
+      if(currentUser?.id===userId){
+        alert("Your documents were saved on this device, but cloud syncing failed: "+error.message);
+      }
+    });
+  },500);
+}
+
+async function syncNow(){
+  if(!currentUser || !sb){
+    alert("Please log in to sync your documents.");
+    return;
+  }
+
+  if(!cloudReady){
+    alert("Your cloud account is still loading. Please try again shortly.");
+    return;
+  }
+
+  clearTimeout(documentSaveTimer);
+
+  try{
+    await documentSaveQueue;
+
+    const userId=currentUser.id;
+
+    const rows=documents.map(doc=>({
+      user_id:userId,
+      document_key:String(doc.id),
+      document_data:doc,
+      updated_at:new Date().toISOString()
+    }));
+
+    if(rows.length){
+      const {error}=await sb
+        .from("zovra_documents")
+        .upsert(rows,{
+          onConflict:"user_id,document_key"
+        });
+
+      if(error)throw error;
+    }
+
+    alert("Your documents have been synced successfully.");
+
+  }catch(error){
+    console.error("ZOVRA manual sync failed:",error);
+    alert("Sync failed: "+error.message);
+  }
+}
+
+
 async function loadCloudData(){
   if(!currentUser||!sb)return;
 

@@ -263,13 +263,27 @@ footer{text-align:center;padding:25px;color:var(--muted);font-size:11px}
   <button class="modal-close" onclick="closeAccount()">×</button>
   <h2 id="authTitle">Welcome to ZOVRA</h2>
   <p id="authDescription">Create an account to sync your documents across devices, or log in to an existing account.</p>
-  <div id="authForm">
-   <div class="field"><label>Email address</label><input type="email" id="authEmail" placeholder="you@example.com" autocomplete="email"></div>
-   <div class="field"><label>Password</label><input type="password" id="authPassword" placeholder="At least 8 characters" autocomplete="current-password"></div>
-   <div class="modal-actions">
-    <button class="btn primary" onclick="submitAuth('login')">Log in</button>
-    <button class="btn gold" onclick="submitAuth('signup')">Create account</button>
-   </div>
+ <div id="authForm">
+  <form onsubmit="event.preventDefault();submitAuth('login')">
+
+    <div class="field">
+      <label>Email address</label>
+      <input type="email" id="authEmail" placeholder="you@example.com" autocomplete="email">
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="authPassword" placeholder="At least 8 characters" autocomplete="current-password">
+    </div>
+
+    <div class="modal-actions">
+      <button type="submit" class="btn primary">Log in</button>
+      <button type="button" class="btn gold" onclick="submitAuth('signup')">Create account</button>
+    </div>
+
+  </form>
+</div>
+
    <p><button class="smallbtn" onclick="resetPassword()">Forgot password?</button></p>
   </div>
   <div id="loggedInPanel" class="hidden">
